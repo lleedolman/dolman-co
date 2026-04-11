@@ -20,167 +20,47 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--navy);
-    color: var(--cream);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
+  body { background: var(--navy); color: var(--cream); font-family: 'Montserrat', sans-serif; font-weight: 300; overflow-x: hidden; }
 
   /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 200;
-    padding: 30px 64px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to bottom, rgba(13,27,46,0.97) 0%, transparent 100%);
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--cream);
-    text-decoration: none;
-  }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 30px 64px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(13,27,46,0.97) 0%, transparent 100%); }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); text-decoration: none; }
   .logo span { color: var(--gold); }
   .nav-right { display: flex; align-items: center; gap: 44px; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; transition: color 0.3s; }
   .nav-links a:hover { color: var(--gold-light); }
-  .nav-cta {
-    display: inline-block;
-    padding: 11px 28px;
-    border: 1px solid rgba(184,151,58,0.5);
-    color: var(--gold-pale);
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
+  .nav-cta { display: inline-block; padding: 11px 28px; border: 1px solid rgba(184,151,58,0.5); color: var(--gold-pale); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   .nav-cta:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
 
   /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 64px 100px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 70% 60% at 75% 15%, rgba(184,151,58,0.07) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 50% at 20% 85%, rgba(184,151,58,0.04) 0%, transparent 60%),
-      linear-gradient(160deg, #0d1b2e 0%, #0a1525 60%, #0d1b2e 100%);
-  }
-  .hero-geo {
-    position: absolute;
-    top: 18%; right: 8%;
-    width: 340px; height: 340px;
-    border: 1px solid rgba(184,151,58,0.08);
-    transform: rotate(15deg);
-    animation: slowRotate 40s linear infinite;
-  }
-  .hero-geo::before {
-    content: '';
-    position: absolute;
-    inset: 24px;
-    border: 1px solid rgba(184,151,58,0.05);
-  }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 64px 100px; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 75% 15%, rgba(184,151,58,0.07) 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 20% 85%, rgba(184,151,58,0.04) 0%, transparent 60%), linear-gradient(160deg, #0d1b2e 0%, #0a1525 60%, #0d1b2e 100%); }
+  .hero-geo { position: absolute; top: 18%; right: 8%; width: 340px; height: 340px; border: 1px solid rgba(184,151,58,0.08); transform: rotate(15deg); animation: slowRotate 40s linear infinite; }
+  .hero-geo::before { content: ''; position: absolute; inset: 24px; border: 1px solid rgba(184,151,58,0.05); }
   @keyframes slowRotate { to { transform: rotate(375deg); } }
-
   .hero-content { position: relative; z-index: 2; max-width: 900px; }
-  .hero-tag {
-    display: flex; align-items: center; gap: 16px; margin-bottom: 36px;
-    opacity: 0; animation: riseIn 0.9s ease 0.2s forwards;
-  }
+  .hero-tag { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; opacity: 0; animation: riseIn 0.9s ease 0.2s forwards; }
   .hero-tag-line { width: 36px; height: 1px; background: var(--gold); }
   .hero-tag span { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.2rem, 6.5vw, 6rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--cream);
-    margin-bottom: 12px;
-    opacity: 0;
-    animation: riseIn 1s ease 0.45s forwards;
-  }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.2rem, 6.5vw, 6rem); font-weight: 300; line-height: 1.05; color: var(--cream); margin-bottom: 12px; opacity: 0; animation: riseIn 1s ease 0.45s forwards; }
   .hero h1 em { font-style: italic; color: var(--gold-light); }
-
-  .hero-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.1rem, 2vw, 1.6rem);
-    font-style: italic;
-    color: rgba(184,151,58,0.7);
-    letter-spacing: 0.06em;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: riseIn 1s ease 0.65s forwards;
-  }
-  .hero-desc {
-    font-size: 0.8rem; line-height: 1.95; color: var(--text-mid);
-    max-width: 500px; letter-spacing: 0.03em; margin-bottom: 52px;
-    opacity: 0; animation: riseIn 1s ease 0.85s forwards;
-  }
-  .hero-actions {
-    display: flex; gap: 18px; align-items: center;
-    opacity: 0; animation: riseIn 1s ease 1.05s forwards;
-  }
-  .btn-primary {
-    display: inline-block; padding: 17px 42px;
-    background: var(--gold); color: var(--navy);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem; font-weight: 600;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    text-decoration: none; transition: all 0.3s;
-  }
+  .hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2vw, 1.6rem); font-style: italic; color: rgba(184,151,58,0.7); letter-spacing: 0.06em; margin-bottom: 40px; opacity: 0; animation: riseIn 1s ease 0.65s forwards; }
+  .hero-desc { font-size: 0.8rem; line-height: 1.95; color: var(--text-mid); max-width: 500px; letter-spacing: 0.03em; margin-bottom: 52px; opacity: 0; animation: riseIn 1s ease 0.85s forwards; }
+  .hero-actions { display: flex; gap: 18px; align-items: center; opacity: 0; animation: riseIn 1s ease 1.05s forwards; }
+  .btn-primary { display: inline-block; padding: 17px 42px; background: var(--gold); color: var(--navy); font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; }
   .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(184,151,58,0.25); }
-  .btn-ghost {
-    display: inline-block; padding: 17px 42px;
-    border: 1px solid rgba(184,151,58,0.35); color: var(--gold-pale);
-    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
-    text-decoration: none; transition: all 0.3s;
-  }
+  .btn-ghost { display: inline-block; padding: 17px 42px; border: 1px solid rgba(184,151,58,0.35); color: var(--gold-pale); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   .btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
-
-  .scroll-hint {
-    position: absolute; bottom: 44px; right: 64px;
-    display: flex; align-items: center; gap: 12px;
-    opacity: 0; animation: riseIn 1s ease 1.4s forwards;
-  }
+  .scroll-hint { position: absolute; bottom: 44px; right: 64px; display: flex; align-items: center; gap: 12px; opacity: 0; animation: riseIn 1s ease 1.4s forwards; }
   .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); writing-mode: vertical-rl; }
   .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent); animation: drip 2s ease-in-out 2s infinite; }
   @keyframes drip { 0%,100% { transform: scaleY(1); opacity: 0.5; } 50% { transform: scaleY(1.3); opacity: 1; } }
   @keyframes riseIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
   .gold-rule { height: 1px; background: linear-gradient(to right, transparent, rgba(184,151,58,0.4), transparent); }
 
   /* CREDENTIAL BAND */
-  .credential-band {
-    padding: 80px 64px; background: var(--navy-mid);
-    display: grid; grid-template-columns: 1fr 2px 1fr 2px 1fr;
-    align-items: center;
-  }
+  .credential-band { padding: 80px 64px; background: var(--navy-mid); display: grid; grid-template-columns: 1fr 2px 1fr 2px 1fr; align-items: center; }
   .cred-divider { height: 60px; background: rgba(184,151,58,0.2); justify-self: center; }
   .cred-item { text-align: center; padding: 0 40px; }
   .cred-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 10px; }
@@ -193,16 +73,9 @@
   .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--cream); }
   .section-title em { font-style: italic; color: var(--gold-light); }
   .section-note { font-size: 0.72rem; line-height: 1.85; color: var(--text-muted); max-width: 340px; text-align: right; }
-
   .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .service-card {
-    background: var(--navy-mid); padding: 52px 44px;
-    position: relative; overflow: hidden; transition: background 0.35s;
-  }
-  .service-card::after {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 2px; height: 0; background: var(--gold); transition: height 0.4s ease;
-  }
+  .service-card { background: var(--navy-mid); padding: 52px 44px; position: relative; overflow: hidden; transition: background 0.35s; }
+  .service-card::after { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--gold); transition: height 0.4s ease; }
   .service-card:hover::after { height: 100%; }
   .service-card:hover { background: var(--navy-light); }
   .svc-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: rgba(184,151,58,0.12); line-height: 1; margin-bottom: 28px; }
@@ -217,7 +90,6 @@
   .why-left p { font-size: 0.78rem; line-height: 2.1; color: var(--text-mid); letter-spacing: 0.02em; margin-bottom: 24px; }
   .why-left blockquote { margin-top: 44px; padding-left: 28px; border-left: 2px solid var(--gold); }
   .why-left blockquote p { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--gold-pale); line-height: 1.6; }
-
   .why-right { padding-top: 12px; display: flex; flex-direction: column; }
   .why-point { padding: 36px 0; border-bottom: 1px solid rgba(184,151,58,0.12); display: grid; grid-template-columns: 28px 1fr; gap: 24px; align-items: start; }
   .why-point:first-child { border-top: 1px solid rgba(184,151,58,0.12); }
@@ -250,9 +122,37 @@
   .footer-col h5 { font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
   .footer-col ul li { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.04em; }
-  .footer-bottom { background: #080f1a; padding: 20px 64px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
-  .footer-bottom p { font-size: 0.62rem; color: rgba(245,240,232,0.3); letter-spacing: 0.1em; }
+  .footer-col ul li a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold-pale); }
+  .footer-bottom { background: #080f1a; padding: 20px 64px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: 0.62rem; color: rgba(245,240,232,0.3); letter-spacing: 0.08em; }
+  .footer-legal-links { display: flex; gap: 24px; }
+  .footer-legal-links a { font-size: 0.62rem; color: rgba(245,240,232,0.35); letter-spacing: 0.08em; text-decoration: none; cursor: pointer; transition: color 0.2s; }
+  .footer-legal-links a:hover { color: var(--gold); }
+  .disclaimer-bar { background: #040a12; padding: 16px 64px; border-top: 1px solid rgba(255,255,255,0.03); }
+  .disclaimer-bar p { font-size: 0.58rem; color: rgba(245,240,232,0.22); letter-spacing: 0.04em; line-height: 1.8; max-width: 1000px; }
+  .disclaimer-bar strong { color: rgba(245,240,232,0.35); }
 
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(8,15,26,0.92); backdrop-filter: blur(6px); overflow-y: auto; padding: 40px 20px; }
+  .modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
+  .modal-box { background: var(--navy-mid); border: 1px solid rgba(184,151,58,0.2); max-width: 780px; width: 100%; margin: auto; position: relative; }
+  .modal-header { padding: 48px 52px 32px; border-bottom: 1px solid rgba(184,151,58,0.15); display: flex; justify-content: space-between; align-items: flex-start; }
+  .modal-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--cream); }
+  .modal-date { font-size: 0.62rem; color: var(--text-muted); margin-top: 8px; }
+  .modal-close { background: none; border: 1px solid rgba(184,151,58,0.3); color: var(--gold); width: 36px; height: 36px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; margin-left: 20px; }
+  .modal-close:hover { background: var(--gold); color: var(--navy); }
+  .modal-body { padding: 40px 52px 52px; max-height: 70vh; overflow-y: auto; }
+  .modal-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--cream); margin: 40px 0 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(184,151,58,0.12); }
+  .modal-body h2:first-child { margin-top: 0; }
+  .modal-body p { font-size: 0.75rem; line-height: 2.1; color: var(--text-mid); margin-bottom: 14px; }
+  .modal-body ul { margin: 10px 0 18px 18px; }
+  .modal-body ul li { font-size: 0.75rem; line-height: 2; color: var(--text-mid); margin-bottom: 4px; }
+  .modal-body a { color: var(--gold-light); text-decoration: none; }
+  .modal-highlight { background: rgba(13,27,46,0.8); border-left: 2px solid var(--gold); padding: 20px 24px; margin: 20px 0; font-size: 0.74rem; line-height: 1.9; color: var(--text-mid); }
+
+  /* MOBILE */
   @media (max-width: 900px) {
     nav { padding: 24px 28px; }
     .nav-links { display: none; }
@@ -266,14 +166,18 @@
     .process-steps { grid-template-columns: 1fr 1fr; }
     .cta-section { padding: 100px 28px; }
     footer { grid-template-columns: 1fr; padding: 48px 28px; }
-    .footer-bottom { padding: 20px 28px; flex-direction: column; gap: 8px; }
+    .footer-bottom { padding: 20px 28px; flex-direction: column; align-items: flex-start; }
+    .disclaimer-bar { padding: 16px 28px; }
     .section-header { flex-direction: column; align-items: flex-start; }
     .section-note { text-align: left; }
+    .modal-header { padding: 32px 28px 24px; }
+    .modal-body { padding: 28px 28px 40px; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a href="#" class="logo">Dolman <span>&</span> Co.</a>
   <div class="nav-right">
@@ -286,6 +190,7 @@
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-geo"></div>
@@ -310,6 +215,7 @@
 
 <div class="gold-rule"></div>
 
+<!-- CREDENTIAL BAND -->
 <div class="credential-band">
   <div class="cred-item">
     <div class="cred-num">IP</div>
@@ -329,6 +235,7 @@
 
 <div class="gold-rule"></div>
 
+<!-- SERVICES -->
 <section class="services" id="services">
   <div class="section-header">
     <div>
@@ -341,19 +248,19 @@
     <div class="service-card">
       <div class="svc-num">01</div>
       <h3 class="svc-name">Trade Mark Search & Clearance</h3>
-      <p class="svc-desc">Before you invest in a brand, know whether it's safe to use. We conduct comprehensive searches across IP Australia's register and the marketplace to identify conflicts before they become costly.</p>
+      <p class="svc-desc">Before you invest in a brand, know whether it is safe to use. We conduct comprehensive searches across IP Australia's register and the marketplace to identify conflicts before they become costly.</p>
       <div class="svc-price">From $600 — $900 AUD</div>
     </div>
     <div class="service-card">
       <div class="svc-num">02</div>
       <h3 class="svc-name">Trade Mark Filing & Prosecution</h3>
-      <p class="svc-desc">We manage the full filing process with IP Australia — drafting specifications, responding to examination reports, and navigating the registration process to give your mark the strongest possible foundation.</p>
+      <p class="svc-desc">We manage the full filing process with IP Australia — drafting specifications, responding to examination reports, and navigating registration to give your mark the strongest possible foundation.</p>
       <div class="svc-price">From $900 — $1,600 AUD + Official Fees</div>
     </div>
     <div class="service-card">
       <div class="svc-num">03</div>
       <h3 class="svc-name">IP Brand Audit</h3>
-      <p class="svc-desc">A thorough review of your entire IP position — what you own, what's exposed, and what needs protecting. Ideal for growing businesses, acquisitions, or anyone who has built a brand without a proper IP strategy.</p>
+      <p class="svc-desc">A thorough review of your entire IP position — what you own, what is exposed, and what needs protecting. Ideal for growing businesses, acquisitions, or anyone who has built a brand without a proper IP strategy.</p>
       <div class="svc-price">From $2,000 — $5,000 AUD</div>
     </div>
     <div class="service-card">
@@ -379,6 +286,7 @@
 
 <div class="gold-rule"></div>
 
+<!-- WHY -->
 <section class="why" id="why">
   <div class="why-left">
     <p class="section-label">Why Dolman & Co.</p>
@@ -424,6 +332,7 @@
 
 <div class="gold-rule"></div>
 
+<!-- PROCESS -->
 <section class="process" id="process">
   <p class="section-label">How It Works</p>
   <h2 class="section-title">A clear path to <em>protection</em></h2>
@@ -453,17 +362,19 @@
 
 <div class="gold-rule"></div>
 
+<!-- CTA -->
 <section class="cta-section" id="contact">
   <p class="section-label">Get Started</p>
   <h2>Ready to protect<br>what you've <em>built?</em></h2>
   <p class="cta-tagline">Leave your mark on the world.</p>
-  <p class="cta-sub">Book a consultation with Dolman & Co. We will assess your position, answer your questions, and give you a clear path forward — with no obligation.</p>
+  <p class="cta-sub">Contact Dolman & Co. today. We will assess your position, answer your questions, and give you a clear path forward.</p>
   <div class="cta-buttons">
     <a href="mailto:trademarks@dolman.com.au" class="btn-primary">Book a Consultation</a>
-    <a href="/cdn-cgi/l/email-protection#28404d444447684c4744454946064b474506495d" class="btn-ghost">Send an Enquiry</a>
+    <a href="tel:+61417706988" class="btn-ghost">+61 417 706 988</a>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-brand">
     <a href="#" class="logo">Dolman <span style="color:var(--gold)">&</span> Co.</a>
@@ -483,28 +394,142 @@
   <div class="footer-col">
     <h5>Contact</h5>
     <ul>
-      <li><a href="mailto:trademarks@dolman.com.au" style="color:inherit;text-decoration:none;">trademarks@dolman.com.au</a></li>
-      <li><a href="tel:+61417706988" style="color:inherit;text-decoration:none;">+61 417 706 988</a></li>
+      <li><a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a></li>
+      <li><a href="tel:+61417706988">+61 417 706 988</a></li>
       <li>Brisbane, Queensland, Australia</li>
-      <li><a href="https://www.dolman.com.au" style="color:inherit;text-decoration:none;">dolman.com.au</a></li>
+      <li><a href="https://www.dolman.com.au">dolman.com.au</a></li>
     </ul>
   </div>
 </footer>
-<div
+
 <div class="footer-bottom">
   <p>© 2026 Dolman & Co. ABN 46 775 837 936. All rights reserved.</p>
-  <p>
-    <a href="privacy.html" style="color:inherit;text-decoration:none;margin-right:20px;">Privacy Policy</a>
-    <a href="terms.html" style="color:inherit;text-decoration:none;margin-right:20px;">Terms of Engagement</a>
-    Registered Trade Mark Attorney · IP Australia
-  </p>
+  <div class="footer-legal-links">
+    <a onclick="openModal('privacy')">Privacy Policy</a>
+    <a onclick="openModal('terms')">Terms of Engagement</a>
+    <span style="font-size:0.62rem;color:rgba(245,240,232,0.3);">Registered Trade Mark Attorney · IP Australia</span>
+  </div>
 </div>
 
-<div style="background:#040a12;padding:16px 64px;border-top:1px solid rgba(255,255,255,0.03);">
-  <p style="font-size:0.58rem;color:rgba(245,240,232,0.22);letter-spacing:0.06em;line-height:1.7;max-width:900px;">
-    <strong style="color:rgba(245,240,232,0.35);">Disclaimer:</strong> Dolman & Co. (ABN 46 775 837 936) is a registered trade mark attorney practice. We are not solicitors and do not provide legal advice outside the scope of trade mark law. The information on this website is general in nature and does not constitute legal advice. Liability limited by a scheme approved under Professional Standards Legislation. © 2026 Dolman & Co. All rights reserved.
-  </p>
+<div class="disclaimer-bar">
+  <p><strong>Disclaimer:</strong> Dolman & Co. (ABN 46 775 837 936) is a registered trade mark attorney practice. We are not solicitors and do not provide legal advice outside the scope of trade mark law. The information on this website is general in nature and does not constitute legal advice. Liability limited by a scheme approved under Professional Standards Legislation.</p>
 </div>
+
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="modal-privacy">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <p class="modal-label">Legal</p>
+        <h2 class="modal-title">Privacy Policy</h2>
+        <p class="modal-date">Last updated: April 2026 · ABN 46 775 837 936</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('privacy')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-highlight">Dolman & Co. (ABN 46 775 837 936) is committed to protecting your privacy in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs).</div>
+      <h2>1. Who We Are</h2>
+      <p>Dolman & Co. is a registered trade mark attorney practice operating in Australia. References to "we", "us", or "our" refer to Dolman & Co. (ABN 46 775 837 936). Our principal contact for privacy matters is trademarks@dolman.com.au.</p>
+      <h2>2. Information We Collect</h2>
+      <p>We may collect the following personal information:</p>
+      <ul>
+        <li>Your name, email address, and phone number when you contact us or book a consultation</li>
+        <li>Business details including ABN, company name, and trading name</li>
+        <li>Information about your trade marks, brand, or IP matters you share with us</li>
+        <li>Payment information processed through secure third-party providers</li>
+        <li>Website usage data collected through cookies and analytics tools</li>
+      </ul>
+      <h2>3. How We Use Your Information</h2>
+      <p>We use your personal information to provide trade mark attorney services, communicate with you about your matter, fulfil obligations to IP Australia, send updates about your registrations, and comply with legal and professional obligations. We will not use your information for unrelated purposes without your consent.</p>
+      <h2>4. Disclosure</h2>
+      <p>We may disclose your information to IP Australia for filing purposes, trusted third-party service providers bound by confidentiality, courts or regulatory bodies where required by law, and other professional advisers where you have instructed us to do so. We do not sell your information to third parties.</p>
+      <h2>5. Storage & Security</h2>
+      <p>We store information securely using reputable cloud-based services with appropriate encryption and access controls. We retain client files for a minimum of seven years following conclusion of a matter.</p>
+      <h2>6. Access & Correction</h2>
+      <p>You have the right to request access to your personal information and to request corrections. Contact us at <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a>. We will respond within 30 days.</p>
+      <h2>7. Complaints</h2>
+      <p>If you believe we have mishandled your personal information, contact us first at <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a>. If unresolved, you may lodge a complaint with the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au" target="_blank">oaic.gov.au</a>.</p>
+      <h2>8. Contact</h2>
+      <div class="modal-highlight">
+        Dolman & Co. · ABN 46 775 837 936<br>
+        Brisbane, Queensland, Australia<br>
+        <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a> · <a href="tel:+61417706988">+61 417 706 988</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal-overlay" id="modal-terms">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <p class="modal-label">Legal</p>
+        <h2 class="modal-title">Terms of Engagement</h2>
+        <p class="modal-date">Last updated: April 2026 · ABN 46 775 837 936</p>
+      </div>
+      <button class="modal-close" onclick="closeModal('terms')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-highlight">These Terms of Engagement govern the provision of trade mark attorney services by Dolman & Co. (ABN 46 775 837 936). By engaging our services, you agree to these terms.</div>
+      <h2>1. About Dolman & Co.</h2>
+      <p>Dolman & Co. (ABN 46 775 837 936) is a registered trade mark attorney practice based in Brisbane, Queensland. We are registered with IP Australia to act as trade mark attorneys. We are not solicitors and do not provide general legal advice.</p>
+      <h2>2. Scope of Services</h2>
+      <p>Our services include trade mark searches and clearance reports, filing and prosecution before IP Australia, portfolio audits, licensing and assignment agreements, enforcement advice and cease and desist correspondence, and representation in IP Australia opposition proceedings. We do not provide Federal Court advocacy.</p>
+      <h2>3. Engagement & Instructions</h2>
+      <p>Our engagement commences when you provide written instructions and we confirm acceptance. You agree to provide accurate, complete, and timely information. We are entitled to rely on the information you provide.</p>
+      <h2>4. Fees & Payment</h2>
+      <p>Fees are as set out in your engagement letter, quoted in AUD exclusive of GST. Official fees payable to IP Australia are disbursements separate from our professional fees. Unless otherwise agreed, invoices are due within 14 days. We may require payment in advance for new clients. Overdue accounts may incur interest at 10% per annum.</p>
+      <h2>5. GST</h2>
+      <p>Dolman & Co. is registered for GST. GST will be added to professional fees at the applicable rate. A tax invoice will be provided for all amounts charged.</p>
+      <h2>6. Confidentiality</h2>
+      <p>We treat all information you provide as confidential and will not disclose it to third parties except as required to provide our services, as required by law, or with your consent. Note that trade mark applications become publicly available on the Australian Trade Mark Register once published by IP Australia.</p>
+      <h2>7. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law, our liability is limited to the fees paid by you for the specific matter giving rise to the claim. We are not liable for indirect or consequential loss. We are not responsible for decisions made by IP Australia or any other regulatory body, which are made at their independent discretion. A successful outcome cannot be guaranteed. Liability limited by a scheme approved under Professional Standards Legislation.</p>
+      <h2>8. Termination</h2>
+      <p>Either party may terminate the engagement by written notice. You remain liable for fees for work completed to the date of termination. Upon termination we will provide a summary of your matter status and return any original documents provided.</p>
+      <h2>9. Complaints</h2>
+      <p>Contact us first at <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a> or <a href="tel:+61417706988">+61 417 706 988</a>. We will respond within 20 business days. Unresolved complaints may be referred to the Trans-Tasman IP Attorneys Board (TTIPAB).</p>
+      <h2>10. Governing Law</h2>
+      <p>These terms are governed by the laws of Queensland, Australia. Any dispute is subject to the exclusive jurisdiction of the courts of Queensland.</p>
+      <h2>11. Contact</h2>
+      <div class="modal-highlight">
+        Dolman & Co. · ABN 46 775 837 936<br>
+        Brisbane, Queensland, Australia<br>
+        <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a> · <a href="tel:+61417706988">+61 417 706 988</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal(type) {
+    document.getElementById('modal-' + type).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(type) {
+    document.getElementById('modal-' + type).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  // Close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  // Close on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => {
+        m.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
