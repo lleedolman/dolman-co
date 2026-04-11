@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dolman & Co. | Trade Mark Attorneys & IP Strategists</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #132038;
+    --navy-light: #1a2d4a;
+    --gold: #b8973a;
+    --gold-light: #d4af5a;
+    --gold-pale: #e8d5a0;
+    --cream: #f5f0e8;
+    --text-muted: rgba(245,240,232,0.6);
+    --text-mid: rgba(245,240,232,0.82);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    padding: 30px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(13,27,46,0.97) 0%, transparent 100%);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 44px; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    display: inline-block;
+    padding: 11px 28px;
+    border: 1px solid rgba(184,151,58,0.5);
+    color: var(--gold-pale);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 64px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 75% 15%, rgba(184,151,58,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 85%, rgba(184,151,58,0.04) 0%, transparent 60%),
+      linear-gradient(160deg, #0d1b2e 0%, #0a1525 60%, #0d1b2e 100%);
+  }
+  .hero-geo {
+    position: absolute;
+    top: 18%; right: 8%;
+    width: 340px; height: 340px;
+    border: 1px solid rgba(184,151,58,0.08);
+    transform: rotate(15deg);
+    animation: slowRotate 40s linear infinite;
+  }
+  .hero-geo::before {
+    content: '';
+    position: absolute;
+    inset: 24px;
+    border: 1px solid rgba(184,151,58,0.05);
+  }
+  @keyframes slowRotate { to { transform: rotate(375deg); } }
+
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-tag {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 36px;
+    opacity: 0; animation: riseIn 0.9s ease 0.2s forwards;
+  }
+  .hero-tag-line { width: 36px; height: 1px; background: var(--gold); }
+  .hero-tag span { font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 6.5vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: riseIn 1s ease 0.45s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    font-style: italic;
+    color: rgba(184,151,58,0.7);
+    letter-spacing: 0.06em;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: riseIn 1s ease 0.65s forwards;
+  }
+  .hero-desc {
+    font-size: 0.8rem; line-height: 1.95; color: var(--text-mid);
+    max-width: 500px; letter-spacing: 0.03em; margin-bottom: 52px;
+    opacity: 0; animation: riseIn 1s ease 0.85s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 18px; align-items: center;
+    opacity: 0; animation: riseIn 1s ease 1.05s forwards;
+  }
+  .btn-primary {
+    display: inline-block; padding: 17px 42px;
+    background: var(--gold); color: var(--navy);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(184,151,58,0.25); }
+  .btn-ghost {
+    display: inline-block; padding: 17px 42px;
+    border: 1px solid rgba(184,151,58,0.35); color: var(--gold-pale);
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  .scroll-hint {
+    position: absolute; bottom: 44px; right: 64px;
+    display: flex; align-items: center; gap: 12px;
+    opacity: 0; animation: riseIn 1s ease 1.4s forwards;
+  }
+  .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); writing-mode: vertical-rl; }
+  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent); animation: drip 2s ease-in-out 2s infinite; }
+  @keyframes drip { 0%,100% { transform: scaleY(1); opacity: 0.5; } 50% { transform: scaleY(1.3); opacity: 1; } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .gold-rule { height: 1px; background: linear-gradient(to right, transparent, rgba(184,151,58,0.4), transparent); }
+
+  /* CREDENTIAL BAND */
+  .credential-band {
+    padding: 80px 64px; background: var(--navy-mid);
+    display: grid; grid-template-columns: 1fr 2px 1fr 2px 1fr;
+    align-items: center;
+  }
+  .cred-divider { height: 60px; background: rgba(184,151,58,0.2); justify-self: center; }
+  .cred-item { text-align: center; padding: 0 40px; }
+  .cred-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+  .cred-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); line-height: 1.6; }
+
+  /* SERVICES */
+  .services { padding: 120px 64px; }
+  .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 72px; gap: 40px; }
+  .section-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--cream); }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+  .section-note { font-size: 0.72rem; line-height: 1.85; color: var(--text-muted); max-width: 340px; text-align: right; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .service-card {
+    background: var(--navy-mid); padding: 52px 44px;
+    position: relative; overflow: hidden; transition: background 0.35s;
+  }
+  .service-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 2px; height: 0; background: var(--gold); transition: height 0.4s ease;
+  }
+  .service-card:hover::after { height: 100%; }
+  .service-card:hover { background: var(--navy-light); }
+  .svc-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: rgba(184,151,58,0.12); line-height: 1; margin-bottom: 28px; }
+  .svc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--cream); margin-bottom: 16px; line-height: 1.3; }
+  .svc-desc { font-size: 0.73rem; line-height: 1.95; color: var(--text-muted); letter-spacing: 0.02em; margin-bottom: 28px; }
+  .svc-price { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); padding-top: 20px; border-top: 1px solid rgba(184,151,58,0.15); }
+
+  /* WHY */
+  .why { padding: 120px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .why-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--cream); margin-bottom: 32px; }
+  .why-left h2 em { font-style: italic; color: var(--gold-light); }
+  .why-left p { font-size: 0.78rem; line-height: 2.1; color: var(--text-mid); letter-spacing: 0.02em; margin-bottom: 24px; }
+  .why-left blockquote { margin-top: 44px; padding-left: 28px; border-left: 2px solid var(--gold); }
+  .why-left blockquote p { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: var(--gold-pale); line-height: 1.6; }
+
+  .why-right { padding-top: 12px; display: flex; flex-direction: column; }
+  .why-point { padding: 36px 0; border-bottom: 1px solid rgba(184,151,58,0.12); display: grid; grid-template-columns: 28px 1fr; gap: 24px; align-items: start; }
+  .why-point:first-child { border-top: 1px solid rgba(184,151,58,0.12); }
+  .why-point-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 8px; }
+  .why-point h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--cream); margin-bottom: 10px; }
+  .why-point p { font-size: 0.72rem; line-height: 1.9; color: var(--text-muted); }
+
+  /* PROCESS */
+  .process { padding: 120px 64px; background: var(--navy-mid); }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 72px; border-top: 1px solid rgba(184,151,58,0.15); }
+  .process-step { padding: 48px 36px 48px 0; border-right: 1px solid rgba(184,151,58,0.1); }
+  .process-step:last-child { border-right: none; padding-right: 0; }
+  .process-step:not(:first-child) { padding-left: 36px; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: rgba(184,151,58,0.1); line-height: 1; margin-bottom: 24px; }
+  .step-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--cream); margin-bottom: 14px; }
+  .step-desc { font-size: 0.72rem; line-height: 1.9; color: var(--text-muted); }
+
+  /* CTA */
+  .cta-section { padding: 140px 64px; text-align: center; position: relative; overflow: hidden; }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(184,151,58,0.06) 0%, transparent 70%); }
+  .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4.5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--cream); margin-bottom: 20px; position: relative; }
+  .cta-section h2 em { font-style: italic; color: var(--gold-light); }
+  .cta-tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: rgba(184,151,58,0.65); margin-bottom: 20px; letter-spacing: 0.06em; }
+  .cta-sub { font-size: 0.76rem; line-height: 1.9; color: var(--text-muted); max-width: 480px; margin: 0 auto 52px; }
+  .cta-buttons { display: flex; gap: 18px; justify-content: center; position: relative; }
+
+  /* FOOTER */
+  footer { background: #080f1a; padding: 60px 64px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; border-top: 1px solid rgba(184,151,58,0.12); }
+  .footer-brand p { font-size: 0.68rem; line-height: 1.85; color: var(--text-muted); max-width: 260px; margin-top: 16px; }
+  .footer-col h5 { font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul li { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.04em; }
+  .footer-bottom { background: #080f1a; padding: 20px 64px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 0.62rem; color: rgba(245,240,232,0.3); letter-spacing: 0.1em; }
+
+  @media (max-width: 900px) {
+    nav { padding: 24px 28px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 28px 80px; }
+    .services { padding: 80px 28px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .credential-band { grid-template-columns: 1fr; padding: 60px 28px; gap: 32px; }
+    .cred-divider { display: none; }
+    .why { grid-template-columns: 1fr; padding: 80px 28px; gap: 60px; }
+    .process { padding: 80px 28px; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .cta-section { padding: 100px 28px; }
+    footer { grid-template-columns: 1fr; padding: 48px 28px; }
+    .footer-bottom { padding: 20px 28px; flex-direction: column; gap: 8px; }
+    .section-header { flex-direction: column; align-items: flex-start; }
+    .section-note { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Dolman <span>&</span> Co.</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#process">Process</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a Consult</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-geo"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-line"></div>
+      <span>Trade Mark Attorneys &nbsp;·&nbsp; Australia</span>
+    </div>
+    <h1>Your brand.<br>Your <em>legacy.</em><br>Protected.</h1>
+    <p class="hero-tagline">Leave your mark on the world.</p>
+    <p class="hero-desc">Dolman & Co. is a boutique intellectual property firm advising Australian businesses on trade mark protection, brand strategy, and IP enforcement. We bring commercial intelligence and legal precision to every engagement.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Begin Your Protection</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<div class="credential-band">
+  <div class="cred-item">
+    <div class="cred-num">IP</div>
+    <div class="cred-label">Australia Registered<br>Trade Mark Attorney</div>
+  </div>
+  <div class="cred-divider"></div>
+  <div class="cred-item">
+    <div class="cred-num">Won</div>
+    <div class="cred-label">Proven in Disputed<br>IP Proceedings</div>
+  </div>
+  <div class="cred-divider"></div>
+  <div class="cred-item">
+    <div class="cred-num">SMB</div>
+    <div class="cred-label">Boutique Focus —<br>Businesses That Mean Business</div>
+  </div>
+</div>
+
+<div class="gold-rule"></div>
+
+<section class="services" id="services">
+  <div class="section-header">
+    <div>
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Protecting what you've<br>worked to <em>build</em></h2>
+    </div>
+    <p class="section-note">Every service is delivered with the rigour of a top-tier firm and the attention of a boutique practice.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-num">01</div>
+      <h3 class="svc-name">Trade Mark Search & Clearance</h3>
+      <p class="svc-desc">Before you invest in a brand, know whether it's safe to use. We conduct comprehensive searches across IP Australia's register and the marketplace to identify conflicts before they become costly.</p>
+      <div class="svc-price">From $600 — $900 AUD</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">02</div>
+      <h3 class="svc-name">Trade Mark Filing & Prosecution</h3>
+      <p class="svc-desc">We manage the full filing process with IP Australia — drafting specifications, responding to examination reports, and navigating the registration process to give your mark the strongest possible foundation.</p>
+      <div class="svc-price">From $900 — $1,600 AUD + Official Fees</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">03</div>
+      <h3 class="svc-name">IP Brand Audit</h3>
+      <p class="svc-desc">A thorough review of your entire IP position — what you own, what's exposed, and what needs protecting. Ideal for growing businesses, acquisitions, or anyone who has built a brand without a proper IP strategy.</p>
+      <div class="svc-price">From $2,000 — $5,000 AUD</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">04</div>
+      <h3 class="svc-name">Licensing & Assignment</h3>
+      <p class="svc-desc">Commercialise your IP with confidence. We draft and review trade mark licence agreements, assignment deeds, and co-existence agreements that protect your interests and reflect the commercial reality of your deal.</p>
+      <div class="svc-price">From $1,500 — $3,000 AUD</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">05</div>
+      <h3 class="svc-name">Enforcement & Cease & Desist</h3>
+      <p class="svc-desc">When someone infringes your rights, you need a firm that acts decisively. We draft enforcement correspondence, manage IP Australia opposition proceedings, and advise on your options with commercial clarity.</p>
+      <div class="svc-price">From $600 — $1,200 AUD</div>
+    </div>
+    <div class="service-card">
+      <div class="svc-num">06</div>
+      <h3 class="svc-name">Brand Protection Retainer</h3>
+      <p class="svc-desc">Ongoing IP counsel for businesses that are growing, launching, or scaling. We monitor your marks, flag new threats, and keep your portfolio current — without you having to think about it.</p>
+      <div class="svc-price">From $600 — $1,500 AUD / month</div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="why" id="why">
+  <div class="why-left">
+    <p class="section-label">Why Dolman & Co.</p>
+    <h2>Intelligence meets<br><em>precision.</em></h2>
+    <p>Most businesses come to us after something has gone wrong — a copycat brand, an infringement claim, a failed registration. We would rather be there before that moment.</p>
+    <p>Dolman & Co. combines genuine legal expertise with sharp commercial instinct. We understand that your brand is not just a logo — it is the value you have built, the reputation you have earned, and the future you are protecting.</p>
+    <p>We work with founders, growing businesses, and creative operators who are serious about their IP and want counsel that matches that seriousness.</p>
+    <blockquote>
+      <p>"Leave your mark on the world — and make sure it is protected."</p>
+    </blockquote>
+  </div>
+  <div class="why-right">
+    <div class="why-point">
+      <div class="why-point-dot"></div>
+      <div>
+        <h4>Boutique attention. Zero bureaucracy.</h4>
+        <p>You speak directly with your attorney. No juniors, no handoffs, no waiting days for a reply to a simple question. Your matter is handled with the focus it deserves.</p>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-point-dot"></div>
+      <div>
+        <h4>Commercial, not just legal.</h4>
+        <p>We understand deals. We bring enterprise-level commercial perspective to every IP engagement — thinking not just about the law, but about your business strategy and growth.</p>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-point-dot"></div>
+      <div>
+        <h4>A proven track record in disputes.</h4>
+        <p>When it comes to contested proceedings at IP Australia, we have demonstrated we can win — including against major international brands. That track record matters when the stakes are high.</p>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-point-dot"></div>
+      <div>
+        <h4>Fixed fees. Full transparency.</h4>
+        <p>You will know what you are paying before we begin. No billing surprises, no inflated hours. Clear, fair pricing for expert work — every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="process" id="process">
+  <p class="section-label">How It Works</p>
+  <h2 class="section-title">A clear path to <em>protection</em></h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <h3 class="step-name">Consultation</h3>
+      <p class="step-desc">We begin with a focused conversation about your brand, your business, and what you need protected. No jargon, no pressure — just clarity on where you stand and what to do next.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h3 class="step-name">Search & Strategy</h3>
+      <p class="step-desc">We conduct a thorough clearance search and present a clear picture of the landscape — risks, opportunities, and our recommended strategy for your specific situation.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h3 class="step-name">Filing & Protection</h3>
+      <p class="step-desc">Once clear to proceed, we handle everything. From drafting your application to managing examination, we ensure your registration is as strong as it can be.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <h3 class="step-name">Ongoing Counsel</h3>
+      <p class="step-desc">Your IP needs evolve as your business grows. We are available for renewals, new filings, licensing questions, and anything else that arises — long after registration.</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="cta-section" id="contact">
+  <p class="section-label">Get Started</p>
+  <h2>Ready to protect<br>what you've <em>built?</em></h2>
+  <p class="cta-tagline">Leave your mark on the world.</p>
+  <p class="cta-sub">Book a consultation with Dolman & Co. We will assess your position, answer your questions, and give you a clear path forward — with no obligation.</p>
+  <div class="cta-buttons">
+    <a href="https://www.dolman.com.au/book-a-consult" class="btn-primary">Book a Consultation</a>
+    <a href="mailto:hello@dolman.com.au" class="btn-ghost">Send an Enquiry</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <a href="#" class="logo">Dolman <span style="color:var(--gold)">&</span> Co.</a>
+    <p>A boutique intellectual property firm advising Australian businesses on trade mark protection, brand strategy, and IP enforcement.</p>
+  </div>
+  <div class="footer-col">
+    <h5>Services</h5>
+    <ul>
+      <li>Trade Mark Search & Clearance</li>
+      <li>Trade Mark Filing & Prosecution</li>
+      <li>IP Brand Audit</li>
+      <li>Licensing & Assignment</li>
+      <li>Enforcement & Disputes</li>
+      <li>Brand Protection Retainer</li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h5>Contact</h5>
+    <ul>
+      <li>hello@dolman.com.au</li>
+      <li>Brisbane, Queensland, Australia</li>
+      <li>dolman.com.au</li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 Dolman & Co. IP Firm. All rights reserved.</p>
+  <p>Registered Trade Mark Attorneys · IP Australia</p>
+</div>
+
+</body>
+</html>
