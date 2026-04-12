@@ -8,15 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #0d1b2e;
-    --navy-mid: #132038;
-    --navy-light: #1a2d4a;
-    --gold: #b8973a;
-    --gold-light: #d4af5a;
-    --gold-pale: #e8d5a0;
-    --cream: #f5f0e8;
-    --text-muted: rgba(245,240,232,0.6);
-    --text-mid: rgba(245,240,232,0.82);
+    --navy: #0d1b2e; --navy-mid: #132038; --navy-light: #1a2d4a;
+    --gold: #b8973a; --gold-light: #d4af5a; --gold-pale: #e8d5a0;
+    --cream: #f5f0e8; --text-muted: rgba(245,240,232,0.6); --text-mid: rgba(245,240,232,0.82);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -24,14 +18,19 @@
 
   /* NAV */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 30px 64px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(13,27,46,0.97) 0%, transparent 100%); }
-  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); text-decoration: none; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); text-decoration: none; cursor: pointer; }
   .logo span { color: var(--gold); }
   .nav-right { display: flex; align-items: center; gap: 44px; }
   .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; transition: color 0.3s; }
-  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
   .nav-cta { display: inline-block; padding: 11px 28px; border: 1px solid rgba(184,151,58,0.5); color: var(--gold-pale); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   .nav-cta:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+  .gold-rule { height: 1px; background: linear-gradient(to right, transparent, rgba(184,151,58,0.4), transparent); }
+
+  /* PAGE SYSTEM */
+  .page { display: none; }
+  .page.active { display: block; }
 
   /* HERO */
   .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 64px 100px; position: relative; overflow: hidden; }
@@ -52,12 +51,7 @@
   .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(184,151,58,0.25); }
   .btn-ghost { display: inline-block; padding: 17px 42px; border: 1px solid rgba(184,151,58,0.35); color: var(--gold-pale); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   .btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
-  .scroll-hint { position: absolute; bottom: 44px; right: 64px; display: flex; align-items: center; gap: 12px; opacity: 0; animation: riseIn 1s ease 1.4s forwards; }
-  .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); writing-mode: vertical-rl; }
-  .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent); animation: drip 2s ease-in-out 2s infinite; }
-  @keyframes drip { 0%,100% { transform: scaleY(1); opacity: 0.5; } 50% { transform: scaleY(1.3); opacity: 1; } }
   @keyframes riseIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .gold-rule { height: 1px; background: linear-gradient(to right, transparent, rgba(184,151,58,0.4), transparent); }
 
   /* CREDENTIAL BAND */
   .credential-band { padding: 80px 64px; background: var(--navy-mid); display: grid; grid-template-columns: 1fr 2px 1fr 2px 1fr; align-items: center; }
@@ -66,12 +60,14 @@
   .cred-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 10px; }
   .cred-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); line-height: 1.6; }
 
-  /* SERVICES */
-  .services { padding: 120px 64px; }
-  .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 72px; gap: 40px; }
+  /* SHARED SECTION STYLES */
   .section-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
   .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 300; line-height: 1.18; color: var(--cream); }
   .section-title em { font-style: italic; color: var(--gold-light); }
+
+  /* SERVICES */
+  .services { padding: 120px 64px; }
+  .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 72px; gap: 40px; }
   .section-note { font-size: 0.72rem; line-height: 1.85; color: var(--text-muted); max-width: 340px; text-align: right; }
   .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
   .service-card { background: var(--navy-mid); padding: 52px 44px; position: relative; overflow: hidden; transition: background 0.35s; }
@@ -116,13 +112,62 @@
   .cta-sub { font-size: 0.76rem; line-height: 1.9; color: var(--text-muted); max-width: 480px; margin: 0 auto 52px; }
   .cta-buttons { display: flex; gap: 18px; justify-content: center; position: relative; }
 
+  /* OUR WORK PAGE */
+  .ow-hero { padding: 160px 64px 100px; position: relative; overflow: hidden; }
+  .ow-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(184,151,58,0.06) 0%, transparent 70%); }
+  .ow-hero-content { position: relative; z-index: 2; }
+  .ow-page-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+  .ow-page-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .ow-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--cream); margin-bottom: 28px; }
+  .ow-hero h1 em { font-style: italic; color: var(--gold-light); }
+  .ow-hero p { font-size: 0.85rem; line-height: 2; color: var(--text-mid); max-width: 600px; }
+
+  .authority { padding: 0 64px 100px; }
+  .authority-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .authority-card { background: var(--navy-mid); padding: 52px; position: relative; overflow: hidden; }
+  .authority-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--gold), transparent); }
+  .authority-source { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .authority-source-line { width: 24px; height: 1px; background: var(--gold); }
+  .authority-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.2vw, 2rem); font-weight: 300; line-height: 1.25; color: var(--cream); margin-bottom: 20px; }
+  .authority-headline em { font-style: italic; color: var(--gold-light); }
+  .authority-desc { font-size: 0.74rem; line-height: 1.95; color: var(--text-muted); }
+  .authority-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; padding: 10px 20px; border: 1px solid rgba(184,151,58,0.25); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+
+  .landmark { padding: 100px 64px; background: var(--navy-mid); }
+  .matters-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+  .matter-card { background: var(--navy); padding: 44px 40px; position: relative; }
+  .matter-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0; transition: opacity 0.3s; }
+  .matter-card:hover::after { opacity: 1; }
+  .matter-type { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .matter-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--cream); margin-bottom: 14px; line-height: 1.3; }
+  .matter-desc { font-size: 0.72rem; line-height: 1.9; color: var(--text-muted); }
+  .matter-outcome { display: inline-block; margin-top: 20px; font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); padding: 6px 14px; border: 1px solid rgba(184,151,58,0.2); }
+
+  .industries { padding: 100px 64px; }
+  .industries-intro { max-width: 640px; margin-bottom: 64px; }
+  .industries-intro p { font-size: 0.8rem; line-height: 2; color: var(--text-mid); }
+  .industry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .industry-card { background: var(--navy-mid); padding: 40px 36px; position: relative; overflow: hidden; cursor: default; transition: background 0.3s; }
+  .industry-card:hover { background: var(--navy-light); }
+  .industry-icon { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; opacity: 0.8; }
+  .industry-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--cream); margin-bottom: 12px; line-height: 1.2; }
+  .industry-pain { font-size: 0.7rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 16px; }
+  .industry-signal { font-size: 0.62rem; color: rgba(184,151,58,0.7); letter-spacing: 0.06em; padding-top: 16px; border-top: 1px solid rgba(184,151,58,0.12); font-style: italic; }
+
+  .associations { padding: 100px 64px; background: var(--navy-mid); }
+  .assoc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px; }
+  .assoc-card { background: var(--navy); padding: 40px 36px; border-top: 1px solid rgba(184,151,58,0.15); }
+  .assoc-role { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .assoc-org { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--cream); margin-bottom: 10px; }
+  .assoc-desc { font-size: 0.7rem; line-height: 1.85; color: var(--text-muted); }
+
   /* FOOTER */
   footer { background: #080f1a; padding: 60px 64px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; border-top: 1px solid rgba(184,151,58,0.12); }
   .footer-brand p { font-size: 0.68rem; line-height: 1.85; color: var(--text-muted); max-width: 260px; margin-top: 16px; }
   .footer-col h5 { font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-col ul li { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.04em; }
-  .footer-col ul li a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li { font-size: 0.7rem; color: var(--text-muted); }
+  .footer-col ul li a { color: inherit; text-decoration: none; transition: color 0.2s; cursor: pointer; }
   .footer-col ul li a:hover { color: var(--gold-pale); }
   .footer-bottom { background: #080f1a; padding: 20px 64px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   .footer-bottom p { font-size: 0.62rem; color: rgba(245,240,232,0.3); letter-spacing: 0.08em; }
@@ -133,7 +178,7 @@
   .disclaimer-bar p { font-size: 0.58rem; color: rgba(245,240,232,0.22); letter-spacing: 0.04em; line-height: 1.8; max-width: 1000px; }
   .disclaimer-bar strong { color: rgba(245,240,232,0.35); }
 
-  /* MODAL */
+  /* MODALS */
   .modal-overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(8,15,26,0.92); backdrop-filter: blur(6px); overflow-y: auto; padding: 40px 20px; }
   .modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
   .modal-box { background: var(--navy-mid); border: 1px solid rgba(184,151,58,0.2); max-width: 780px; width: 100%; margin: auto; position: relative; }
@@ -156,15 +201,18 @@
   @media (max-width: 900px) {
     nav { padding: 24px 28px; }
     .nav-links { display: none; }
-    .hero { padding: 0 28px 80px; }
-    .services { padding: 80px 28px; }
-    .services-grid { grid-template-columns: 1fr; }
+    .hero, .ow-hero { padding: 0 28px 80px; }
+    .ow-hero { padding-top: 120px; }
+    .services, .industries, .associations { padding: 80px 28px; }
+    .services-grid, .industry-grid, .matters-grid, .assoc-grid { grid-template-columns: 1fr; }
     .credential-band { grid-template-columns: 1fr; padding: 60px 28px; gap: 32px; }
     .cred-divider { display: none; }
     .why { grid-template-columns: 1fr; padding: 80px 28px; gap: 60px; }
     .process { padding: 80px 28px; }
     .process-steps { grid-template-columns: 1fr 1fr; }
-    .cta-section { padding: 100px 28px; }
+    .cta-section, .landmark { padding: 80px 28px; }
+    .authority { padding: 0 28px 60px; }
+    .authority-grid { grid-template-columns: 1fr; }
     footer { grid-template-columns: 1fr; padding: 48px 28px; }
     .footer-bottom { padding: 20px 28px; flex-direction: column; align-items: flex-start; }
     .disclaimer-bar { padding: 16px 28px; }
@@ -177,194 +225,99 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="logo">Dolman <span>&</span> Co.</a>
+  <a class="logo" onclick="showPage('home')">Dolman <span>&</span> Co.</a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#why">About</a></li>
-      <li><a href="#process">Process</a></li>
+      <li><a onclick="showPage('home'); scrollTo('#services')">Services</a></li>
+      <li><a onclick="showPage('home'); scrollTo('#why')">About</a></li>
+      <li><a onclick="showPage('home'); scrollTo('#process')">Process</a></li>
+      <li><a id="nav-our-work" onclick="showPage('ourwork')">Our Work</a></li>
     </ul>
     <a href="mailto:trademarks@dolman.com.au" class="nav-cta">Book a Consult</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ========== HOME PAGE ========== -->
+<div class="page active" id="page-home">
+
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-geo"></div>
   <div class="hero-content">
-    <div class="hero-tag">
-      <div class="hero-tag-line"></div>
-      <span>Trade Mark Attorneys &nbsp;·&nbsp; Australia</span>
-    </div>
+    <div class="hero-tag"><div class="hero-tag-line"></div><span>Trade Mark Attorneys &nbsp;·&nbsp; Australia</span></div>
     <h1>Your brand.<br>Your <em>legacy.</em><br>Protected.</h1>
     <p class="hero-tagline">Leave your mark on the world.</p>
-    <p class="hero-desc">Dolman & Co. is a boutique intellectual property firm advising Australian businesses on trade mark protection, brand strategy, and IP enforcement. We bring commercial intelligence and legal precision to every engagement.</p>
+    <p class="hero-desc">We protect the brands that are building Australia's future — from the founder just starting out to the business ready to scale nationally. Dolman & Co. brings commercial intelligence and legal precision to every engagement, regardless of size.</p>
     <div class="hero-actions">
       <a href="mailto:trademarks@dolman.com.au" class="btn-primary">Begin Your Protection</a>
-      <a href="#services" class="btn-ghost">Our Services</a>
+      <a href="#services" class="btn-ghost" onclick="document.getElementById('services-section').scrollIntoView({behavior:'smooth'})">Our Services</a>
     </div>
-  </div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
   </div>
 </section>
 
 <div class="gold-rule"></div>
 
-<!-- CREDENTIAL BAND -->
 <div class="credential-band">
-  <div class="cred-item">
-    <div class="cred-num">IP</div>
-    <div class="cred-label">Australia Registered<br>Trade Mark Attorney</div>
-  </div>
+  <div class="cred-item"><div class="cred-num">IP</div><div class="cred-label">Australia Registered<br>Trade Mark Attorney</div></div>
   <div class="cred-divider"></div>
-  <div class="cred-item">
-    <div class="cred-num">Won</div>
-    <div class="cred-label">Proven in Disputed<br>IP Proceedings</div>
-  </div>
+  <div class="cred-item"><div class="cred-num">Won</div><div class="cred-label">Proven in Disputed<br>IP Proceedings</div></div>
   <div class="cred-divider"></div>
-  <div class="cred-item">
-    <div class="cred-num">SMB</div>
-    <div class="cred-label">Boutique Focus —<br>Businesses That Mean Business</div>
-  </div>
+  <div class="cred-item"><div class="cred-num">SMB</div><div class="cred-label">Boutique Focus —<br>Businesses That Mean Business</div></div>
 </div>
 
 <div class="gold-rule"></div>
 
-<!-- SERVICES -->
-<section class="services" id="services">
+<section class="services" id="services-section">
   <div class="section-header">
-    <div>
-      <p class="section-label">What We Do</p>
-      <h2 class="section-title">Protecting what you've<br>worked to <em>build</em></h2>
-    </div>
+    <div><p class="section-label">What We Do</p><h2 class="section-title">Protecting what you've<br>worked to <em>build</em></h2></div>
     <p class="section-note">Every service is delivered with the rigour of a top-tier firm and the attention of a boutique practice.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card">
-      <div class="svc-num">01</div>
-      <h3 class="svc-name">Trade Mark Search & Clearance</h3>
-      <p class="svc-desc">Before you invest in a brand, know whether it is safe to use. We conduct comprehensive searches across IP Australia's register and the marketplace to identify conflicts before they become costly.</p>
-      <div class="svc-price">From $600 — $900 AUD</div>
-    </div>
-    <div class="service-card">
-      <div class="svc-num">02</div>
-      <h3 class="svc-name">Trade Mark Filing & Prosecution</h3>
-      <p class="svc-desc">We manage the full filing process with IP Australia — drafting specifications, responding to examination reports, and navigating registration to give your mark the strongest possible foundation.</p>
-      <div class="svc-price">From $900 — $1,600 AUD + Official Fees</div>
-    </div>
-    <div class="service-card">
-      <div class="svc-num">03</div>
-      <h3 class="svc-name">IP Brand Audit</h3>
-      <p class="svc-desc">A thorough review of your entire IP position — what you own, what is exposed, and what needs protecting. Ideal for growing businesses, acquisitions, or anyone who has built a brand without a proper IP strategy.</p>
-      <div class="svc-price">From $2,000 — $5,000 AUD</div>
-    </div>
-    <div class="service-card">
-      <div class="svc-num">04</div>
-      <h3 class="svc-name">Licensing & Assignment</h3>
-      <p class="svc-desc">Commercialise your IP with confidence. We draft and review trade mark licence agreements, assignment deeds, and co-existence agreements that protect your interests and reflect the commercial reality of your deal.</p>
-      <div class="svc-price">From $1,500 — $3,000 AUD</div>
-    </div>
-    <div class="service-card">
-      <div class="svc-num">05</div>
-      <h3 class="svc-name">Enforcement & Cease & Desist</h3>
-      <p class="svc-desc">When someone infringes your rights, you need a firm that acts decisively. We draft enforcement correspondence, manage IP Australia opposition proceedings, and advise on your options with commercial clarity.</p>
-      <div class="svc-price">From $600 — $1,200 AUD</div>
-    </div>
-    <div class="service-card">
-      <div class="svc-num">06</div>
-      <h3 class="svc-name">Brand Protection Retainer</h3>
-      <p class="svc-desc">Ongoing IP counsel for businesses that are growing, launching, or scaling. We monitor your marks, flag new threats, and keep your portfolio current — without you having to think about it.</p>
-      <div class="svc-price">From $600 — $1,500 AUD / month</div>
-    </div>
+    <div class="service-card"><div class="svc-num">01</div><h3 class="svc-name">Trade Mark Search & Clearance</h3><p class="svc-desc">Before you invest in a brand, know whether it is safe to use. We conduct comprehensive searches across IP Australia's register and the marketplace to identify conflicts before they become costly.</p><div class="svc-price">From $600 — $900 AUD</div></div>
+    <div class="service-card"><div class="svc-num">02</div><h3 class="svc-name">Trade Mark Filing & Prosecution</h3><p class="svc-desc">We manage the full filing process with IP Australia — drafting specifications, responding to examination reports, and navigating registration to give your mark the strongest possible foundation.</p><div class="svc-price">From $900 — $1,600 AUD + Official Fees</div></div>
+    <div class="service-card"><div class="svc-num">03</div><h3 class="svc-name">IP Brand Audit</h3><p class="svc-desc">A thorough review of your entire IP position — what you own, what is exposed, and what needs protecting. Ideal for growing businesses, acquisitions, or anyone who has built a brand without a proper IP strategy.</p><div class="svc-price">From $2,000 — $5,000 AUD</div></div>
+    <div class="service-card"><div class="svc-num">04</div><h3 class="svc-name">Licensing & Assignment</h3><p class="svc-desc">Commercialise your IP with confidence. We draft and review trade mark licence agreements, assignment deeds, and co-existence agreements that protect your interests and reflect the commercial reality of your deal.</p><div class="svc-price">From $1,500 — $3,000 AUD</div></div>
+    <div class="service-card"><div class="svc-num">05</div><h3 class="svc-name">Enforcement & Cease & Desist</h3><p class="svc-desc">When someone infringes your rights, you need a firm that acts decisively. We draft enforcement correspondence, manage IP Australia opposition proceedings, and advise on your options with commercial clarity.</p><div class="svc-price">From $600 — $1,200 AUD</div></div>
+    <div class="service-card"><div class="svc-num">06</div><h3 class="svc-name">Brand Protection Retainer</h3><p class="svc-desc">Ongoing IP counsel for businesses that are growing, launching, or scaling. We monitor your marks, flag new threats, and keep your portfolio current — without you having to think about it.</p><div class="svc-price">From $600 — $1,500 AUD / month</div></div>
   </div>
 </section>
 
 <div class="gold-rule"></div>
 
-<!-- WHY -->
 <section class="why" id="why">
   <div class="why-left">
     <p class="section-label">Why Dolman & Co.</p>
     <h2>Intelligence meets<br><em>precision.</em></h2>
     <p>Most businesses come to us after something has gone wrong — a copycat brand, an infringement claim, a failed registration. We would rather be there before that moment.</p>
     <p>Dolman & Co. combines genuine legal expertise with sharp commercial instinct. We understand that your brand is not just a logo — it is the value you have built, the reputation you have earned, and the future you are protecting.</p>
-    <p>We work with founders, growing businesses, and creative operators who are serious about their IP and want counsel that matches that seriousness.</p>
-    <blockquote>
-      <p>"Leave your mark on the world — and make sure it is protected."</p>
-    </blockquote>
+    <p>We work with the founder registering her first trade mark, the beauty brand going national, the tech startup preparing for investment, and the established business protecting decades of brand equity. Every client gets the same standard of work — because every brand matters.</p>
+    <blockquote><p>"Leave your mark on the world — and make sure it is protected."</p></blockquote>
   </div>
   <div class="why-right">
-    <div class="why-point">
-      <div class="why-point-dot"></div>
-      <div>
-        <h4>Boutique attention. Zero bureaucracy.</h4>
-        <p>You speak directly with your attorney. No juniors, no handoffs, no waiting days for a reply to a simple question. Your matter is handled with the focus it deserves.</p>
-      </div>
-    </div>
-    <div class="why-point">
-      <div class="why-point-dot"></div>
-      <div>
-        <h4>Commercial, not just legal.</h4>
-        <p>We understand deals. We bring enterprise-level commercial perspective to every IP engagement — thinking not just about the law, but about your business strategy and growth.</p>
-      </div>
-    </div>
-    <div class="why-point">
-      <div class="why-point-dot"></div>
-      <div>
-        <h4>A proven track record in disputes.</h4>
-        <p>When it comes to contested proceedings at IP Australia, we have demonstrated we can win — including against major international brands. That track record matters when the stakes are high.</p>
-      </div>
-    </div>
-    <div class="why-point">
-      <div class="why-point-dot"></div>
-      <div>
-        <h4>Fixed fees. Full transparency.</h4>
-        <p>You will know what you are paying before we begin. No billing surprises, no inflated hours. Clear, fair pricing for expert work — every time.</p>
-      </div>
-    </div>
+    <div class="why-point"><div class="why-point-dot"></div><div><h4>Boutique attention. Zero bureaucracy.</h4><p>You speak directly with your attorney. No juniors, no handoffs, no waiting days for a reply. Your matter is handled with the focus it deserves.</p></div></div>
+    <div class="why-point"><div class="why-point-dot"></div><div><h4>Commercial, not just legal.</h4><p>We understand deals. We bring enterprise-level commercial perspective to every IP engagement — thinking not just about the law, but about your business strategy and growth.</p></div></div>
+    <div class="why-point"><div class="why-point-dot"></div><div><h4>A proven track record in disputes.</h4><p>When it comes to contested proceedings at IP Australia, we have demonstrated we can win — including against major international brands. That track record matters when the stakes are high.</p></div></div>
+    <div class="why-point"><div class="why-point-dot"></div><div><h4>Fixed fees. Full transparency.</h4><p>You will know what you are paying before we begin. No billing surprises, no inflated hours. Clear, fair pricing for expert work — every time.</p></div></div>
   </div>
 </section>
 
 <div class="gold-rule"></div>
 
-<!-- PROCESS -->
 <section class="process" id="process">
   <p class="section-label">How It Works</p>
   <h2 class="section-title">A clear path to <em>protection</em></h2>
   <div class="process-steps">
-    <div class="process-step">
-      <div class="step-num">01</div>
-      <h3 class="step-name">Consultation</h3>
-      <p class="step-desc">We begin with a focused conversation about your brand, your business, and what you need protected. No jargon, no pressure — just clarity on where you stand and what to do next.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-num">02</div>
-      <h3 class="step-name">Search & Strategy</h3>
-      <p class="step-desc">We conduct a thorough clearance search and present a clear picture of the landscape — risks, opportunities, and our recommended strategy for your specific situation.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-num">03</div>
-      <h3 class="step-name">Filing & Protection</h3>
-      <p class="step-desc">Once clear to proceed, we handle everything. From drafting your application to managing examination, we ensure your registration is as strong as it can be.</p>
-    </div>
-    <div class="process-step">
-      <div class="step-num">04</div>
-      <h3 class="step-name">Ongoing Counsel</h3>
-      <p class="step-desc">Your IP needs evolve as your business grows. We are available for renewals, new filings, licensing questions, and anything else that arises — long after registration.</p>
-    </div>
+    <div class="process-step"><div class="step-num">01</div><h3 class="step-name">Consultation</h3><p class="step-desc">We begin with a focused conversation about your brand, your business, and what you need protected. No jargon, no pressure — just clarity on where you stand and what to do next.</p></div>
+    <div class="process-step"><div class="step-num">02</div><h3 class="step-name">Search & Strategy</h3><p class="step-desc">We conduct a thorough clearance search and present a clear picture of the landscape — risks, opportunities, and our recommended strategy for your specific situation.</p></div>
+    <div class="process-step"><div class="step-num">03</div><h3 class="step-name">Filing & Protection</h3><p class="step-desc">Once clear to proceed, we handle everything. From drafting your application to managing examination, we ensure your registration is as strong as it can be.</p></div>
+    <div class="process-step"><div class="step-num">04</div><h3 class="step-name">Ongoing Counsel</h3><p class="step-desc">Your IP needs evolve as your business grows. We are available for renewals, new filings, licensing questions, and anything else that arises — long after registration.</p></div>
   </div>
 </section>
 
 <div class="gold-rule"></div>
 
-<!-- CTA -->
 <section class="cta-section" id="contact">
-  <p class="section-label">Get Started</p>
   <h2>Ready to protect<br>what you've <em>built?</em></h2>
   <p class="cta-tagline">Leave your mark on the world.</p>
   <p class="cta-sub">Contact Dolman & Co. today. We will assess your position, answer your questions, and give you a clear path forward.</p>
@@ -374,21 +327,119 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+</div><!-- end page-home -->
+
+<!-- ========== OUR WORK PAGE ========== -->
+<div class="page" id="page-ourwork">
+
+<section class="ow-hero">
+  <div class="ow-hero-content">
+    <p class="ow-page-label">Our Work</p>
+    <h1>A track record built<br>across <em>every industry</em><br>that matters.</h1>
+    <p>From global beauty conglomerates to federal cybersecurity firms, from first-time founders to established resources companies — Dolman & Co. has protected brands at every level of ambition. Here is what that looks like.</p>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="authority">
+  <div class="authority-grid">
+    <div class="authority-card">
+      <div class="authority-source"><div class="authority-source-line"></div>Forbes</div>
+      <h2 class="authority-headline">The Australian Attorney Taking on <em>Global Brands</em> — and Winning</h2>
+      <p class="authority-desc">Featured in Forbes for her work representing Australian businesses against some of the world's most powerful corporations, Dolman & Co.'s principal was recognised for bringing enterprise-level IP strategy to founders and growing businesses who deserve the same standard of protection as the companies they compete with.</p>
+      <div class="authority-badge">As Featured in Forbes</div>
+    </div>
+    <div class="authority-card">
+      <div class="authority-source"><div class="authority-source-line"></div>Landmark Matter</div>
+      <h2 class="authority-headline">David versus Goliath — <em>Fortune 500 Defeated</em> at IP Australia</h2>
+      <p class="authority-desc">In one of our most significant matters, Dolman & Co. successfully prosecuted a trade mark dispute against one of America's largest Fortune 500 conglomerates — prevailing at IP Australia in a case that demonstrated that the size of the opposing party is no barrier to a well-argued, well-prepared position. Our client's brand was protected. Their rights were upheld. The result stood.</p>
+      <div class="authority-badge">Prevailed — IP Australia Proceedings</div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="landmark">
+  <p class="section-label">Experience</p>
+  <h2 class="section-title">The work that defines us</h2>
+  <div class="matters-grid">
+    <div class="matter-card"><div class="matter-type">Global Portfolio Management</div><h3 class="matter-title">International Beauty Brand — End-to-End Trade Mark Portfolio</h3><p class="matter-desc">Built and managed a comprehensive trade mark portfolio for a global beauty brand — from initial clearance searches through to multi-jurisdictional filings, portfolio strategy, and ongoing enforcement. Every product line. Every market. Protected.</p><div class="matter-outcome">Portfolio Architecture</div></div>
+    <div class="matter-card"><div class="matter-type">Sector Specialisation</div><h3 class="matter-title">Aesthetics & Beauty Clinics — Industry-Wide Protection</h3><p class="matter-desc">Acted for multiple aesthetician businesses and clinics across Australia, securing trade mark registrations for clinic names, treatment brands, and product lines. We understand the regulatory landscape and the commercial pressures facing this sector.</p><div class="matter-outcome">Multiple Registrations Secured</div></div>
+    <div class="matter-card"><div class="matter-type">Technology</div><h3 class="matter-title">SaaS Founders — Protecting Software Brands at Scale</h3><p class="matter-desc">Retained counsel for multiple SaaS founders navigating brand protection in competitive global markets. From pre-launch clearance to investor-ready IP schedules, we ensure technology brands are protected before they scale — not after.</p><div class="matter-outcome">Portfolio Counsel</div></div>
+    <div class="matter-card"><div class="matter-type">Resources & Mining</div><h3 class="matter-title">Mining Resources Company — Ongoing IP Portfolio Management</h3><p class="matter-desc">Active trade mark portfolio management for a mining and resources company, covering brand assets, operational marks, and product identifiers across Australia. We understand the commercial realities of the resources sector and deliver IP advice that reflects them.</p><div class="matter-outcome">Active Portfolio Management</div></div>
+    <div class="matter-card"><div class="matter-type">Cybersecurity & Government</div><h3 class="matter-title">Federal Cybersecurity Firm — Brand Protection in a High-Stakes Sector</h3><p class="matter-desc">Trade mark strategy and portfolio management for a federal cybersecurity firm operating at the intersection of technology, national security, and enterprise. Brand protection in this sector demands precision — we deliver exactly that.</p><div class="matter-outcome">Strategic IP Counsel</div></div>
+    <div class="matter-card"><div class="matter-type">Professional Services</div><h3 class="matter-title">Consultancy Firm — Commercial Brand Protection</h3><p class="matter-desc">End-to-end trade mark protection for a professional services and consultancy firm, including brand clearance, registration, and licensing strategy. We understand that a consultancy's brand is its most commercially valuable asset.</p><div class="matter-outcome">Full Protection Secured</div></div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="industries">
+  <p class="section-label">Industries We Serve</p>
+  <h2 class="section-title">Whatever your industry,<br>we speak your <em>language.</em></h2>
+  <div class="industries-intro"><p>Trade mark law does not change between industries — but the commercial landscape, the risks, and the language do. We have worked across enough sectors to understand what matters to your business, not just your application.</p></div>
+  <div class="industry-grid">
+    <div class="industry-card"><div class="industry-icon">Beauty & Cosmetics</div><h3 class="industry-name">Beauty, Skincare & Cosmetics</h3><p class="industry-pain">Product names, formulation brands, and salon names are copied constantly in this sector. Before you launch — register. We have protected beauty brands at every scale from indie founders to global product lines.</p><div class="industry-signal">Active experience across beauty brands, product portfolios and global filings</div></div>
+    <div class="industry-card"><div class="industry-icon">Aesthetics & Clinics</div><h3 class="industry-name">Aesthetics, Medispa & Clinics</h3><p class="industry-pain">Clinic names and treatment brands are some of the most frequently copied in Australia. Whether you are a solo practitioner or a multi-location clinic group, your brand is your reputation — and it needs to be protected.</p><div class="industry-signal">Acted for multiple aesthetician businesses across Australia</div></div>
+    <div class="industry-card"><div class="industry-icon">Fashion & Lifestyle</div><h3 class="industry-name">Fashion, Apparel & Lifestyle</h3><p class="industry-pain">In a sector defined by brand identity, trade mark registration is not optional — it is the foundation. From label names to signature marks, we protect fashion brands at launch and as they scale into new markets.</p><div class="industry-signal">National and international filing experience</div></div>
+    <div class="industry-card"><div class="industry-icon">SaaS & Technology</div><h3 class="industry-name">SaaS & Software</h3><p class="industry-pain">In global software markets, brand conflicts surface fast. Investors and acquirers require clean IP before term sheets are signed. We work with SaaS founders from pre-launch through to acquisition-ready portfolio management.</p><div class="industry-signal">Retained counsel for multiple SaaS founders</div></div>
+    <div class="industry-card"><div class="industry-icon">Cybersecurity</div><h3 class="industry-name">Cybersecurity & Defence Tech</h3><p class="industry-pain">Operating at the intersection of technology and national security demands IP counsel that understands the sector. We have worked with federal cybersecurity firms and understand the precision this industry requires.</p><div class="industry-signal">Active experience with federal cybersecurity clients</div></div>
+    <div class="industry-card"><div class="industry-icon">Fintech</div><h3 class="industry-name">Fintech & Financial Services</h3><p class="industry-pain">Fintech brands move fast and operate in crowded, regulated markets. Early trade mark protection prevents costly conflicts down the line — and gives investors confidence that the brand they are backing is clean.</p><div class="industry-signal">Pre-launch to scale-up brand protection</div></div>
+    <div class="industry-card"><div class="industry-icon">Mining & Resources</div><h3 class="industry-name">Mining, Resources & Energy</h3><p class="industry-pain">Resources companies carry significant brand equity in their operational marks, product identifiers, and corporate identity. We provide portfolio management that reflects the commercial scale and complexity of this sector.</p><div class="industry-signal">Active portfolio management for mining resources clients</div></div>
+    <div class="industry-card"><div class="industry-icon">Clean Tech</div><h3 class="industry-name">Clean Energy & Sustainability</h3><p class="industry-pain">Australia's clean energy sector is growing at pace — and brand disputes are growing with it. We help clean tech founders and companies secure their IP before competitors or bad actors get there first.</p><div class="industry-signal">Emerging sector IP strategy</div></div>
+    <div class="industry-card"><div class="industry-icon">Food & Beverage</div><h3 class="industry-name">Food, Beverage & Hospitality</h3><p class="industry-pain">Restaurant names, product brands, and signature concepts are highly vulnerable in this sector. Whether you are launching a product line or scaling a hospitality brand nationally, your name deserves protection from day one.</p><div class="industry-signal">Brand protection from launch to national scale</div></div>
+    <div class="industry-card"><div class="industry-icon">Health & Wellness</div><h3 class="industry-name">Health, Wellness & Pharmaceuticals</h3><p class="industry-pain">Health brands operate in a sector where trust and brand identity are inseparable. Trade mark protection ensures no competitor can trade on the reputation you have built or confuse your patients and clients.</p><div class="industry-signal">Regulatory-aware IP strategy</div></div>
+    <div class="industry-card"><div class="industry-icon">Professional Services</div><h3 class="industry-name">Professional Services & Consulting</h3><p class="industry-pain">For consulting and professional services firms, the brand is the business. Protecting it — from firm name to service methodology marks — ensures your reputation cannot be appropriated by competitors.</p><div class="industry-signal">Acted for consultancy and advisory firms</div></div>
+    <div class="industry-card"><div class="industry-icon">Creative Industries</div><h3 class="industry-name">Creative, Media & Publishing</h3><p class="industry-pain">Authors, musicians, producers, and publishers create IP every day — and most of it is unprotected. We work with creative professionals to secure the marks that protect their work, their name, and their commercial future.</p><div class="industry-signal">IP protection for creative professionals</div></div>
+    <div class="industry-card"><div class="industry-icon">Education & Training</div><h3 class="industry-name">Education, Training & Coaching</h3><p class="industry-pain">Course names, methodology brands, and educational frameworks are increasingly valuable — and increasingly copied. Trade mark protection gives education brands the legal foundation to scale and franchise with confidence.</p><div class="industry-signal">Brand and methodology protection</div></div>
+    <div class="industry-card"><div class="industry-icon">Retail & E-Commerce</div><h3 class="industry-name">Retail & E-Commerce</h3><p class="industry-pain">Online marketplaces are rife with brand infringement. We help retail and e-commerce brands secure their trade marks before they scale — and enforce them when competitors, counterfeiters, or platform sellers cross the line.</p><div class="industry-signal">Marketplace and platform brand protection</div></div>
+    <div class="industry-card"><div class="industry-icon">Construction & Engineering</div><h3 class="industry-name">Construction, Engineering & Infrastructure</h3><p class="industry-pain">Trades, engineering firms, and construction businesses invest decades into building a name. Protecting that name — especially as you expand into new states or tender for larger contracts — is an investment in everything you have built.</p><div class="industry-signal">Commercial-scale brand protection</div></div>
+    <div class="industry-card"><div class="industry-icon">Startups & Scale-Ups</div><h3 class="industry-name">Startups, Founders & Scale-Ups</h3><p class="industry-pain">Early-stage brands are the most vulnerable — and the most often overlooked. We work with founders from day one, ensuring your IP is protected before investors, competitors, or acquirers test its strength.</p><div class="industry-signal">From idea to investor-ready IP portfolio</div></div>
+    <div class="industry-card"><div class="industry-icon">Not-for-Profit</div><h3 class="industry-name">Not-for-Profit & Social Enterprise</h3><p class="industry-pain">Mission-driven organisations carry brands that represent more than commerce — they represent community and cause. We ensure those brands are protected so that your name, your mission, and your reputation remain yours.</p><div class="industry-signal">Purpose-led brand protection</div></div>
+    <div class="industry-card"><div class="industry-icon">Sport & Events</div><h3 class="industry-name">Sport, Events & Entertainment</h3><p class="industry-pain">Sports teams, event brands, and entertainment properties generate significant commercial value from their names and marks. We protect that value — from grassroots clubs to national competitions and touring events.</p><div class="industry-signal">Event and competition brand protection</div></div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="associations">
+  <p class="section-label">Leadership & Recognition</p>
+  <h2 class="section-title">Beyond the <em>practice</em></h2>
+  <div class="assoc-grid">
+    <div class="assoc-card"><div class="assoc-role">Board Member</div><h3 class="assoc-org">Fraser Coast District Law Association</h3><p class="assoc-desc">Serving as a board member of the Fraser Coast District Law Association, contributing to the governance and direction of legal practice across the region and supporting the profession at a structural level.</p></div>
+    <div class="assoc-card"><div class="assoc-role">Registered Attorney</div><h3 class="assoc-org">IP Australia — Trade Mark Attorney Register</h3><p class="assoc-desc">Registered with IP Australia as a trade mark attorney, meeting the qualification and professional standards required to represent clients before the Trade Marks Office in all matters including oppositions, hearings, and prosecution.</p></div>
+    <div class="assoc-card"><div class="assoc-role">Media Recognition</div><h3 class="assoc-org">Forbes — International Business Press</h3><p class="assoc-desc">Featured in Forbes for work at the intersection of intellectual property, commercial strategy, and the protection of Australian businesses competing on a global stage.</p></div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<section class="cta-section">
+  <h2>Don't see your industry?<br><em>We do.</em></h2>
+  <p class="cta-sub">Dolman & Co. works across every sector where brands are built and businesses compete. If you have a brand worth protecting — regardless of your industry — we want to hear from you.</p>
+  <div class="cta-buttons">
+    <a href="mailto:trademarks@dolman.com.au" class="btn-primary">Start the Conversation</a>
+    <a href="tel:+61417706988" class="btn-ghost">+61 417 706 988</a>
+  </div>
+</section>
+
+</div><!-- end page-ourwork -->
+
+<!-- SHARED FOOTER -->
 <footer>
   <div class="footer-brand">
-    <a href="#" class="logo">Dolman <span style="color:var(--gold)">&</span> Co.</a>
+    <a class="logo" onclick="showPage('home')" style="display:inline-block;margin-bottom:16px;">Dolman <span style="color:var(--gold)">&</span> Co.</a>
     <p>A boutique intellectual property firm advising Australian businesses on trade mark protection, brand strategy, and IP enforcement.</p>
   </div>
   <div class="footer-col">
-    <h5>Services</h5>
+    <h5>Navigate</h5>
     <ul>
-      <li>Trade Mark Search & Clearance</li>
-      <li>Trade Mark Filing & Prosecution</li>
-      <li>IP Brand Audit</li>
-      <li>Licensing & Assignment</li>
-      <li>Enforcement & Disputes</li>
-      <li>Brand Protection Retainer</li>
+      <li><a onclick="showPage('home'); document.getElementById('services-section').scrollIntoView({behavior:'smooth'})">Services</a></li>
+      <li><a onclick="showPage('home'); document.getElementById('why').scrollIntoView({behavior:'smooth'})">About</a></li>
+      <li><a onclick="showPage('home'); document.getElementById('process').scrollIntoView({behavior:'smooth'})">Process</a></li>
+      <li><a onclick="showPage('ourwork')">Our Work</a></li>
     </ul>
   </div>
   <div class="footer-col">
@@ -412,49 +463,23 @@
 </div>
 
 <div class="disclaimer-bar">
-  <p><strong>Disclaimer:</strong> Dolman & Co. (ABN 46 775 837 936) is a registered trade mark attorney practice. We are not solicitors and do not provide legal advice outside the scope of trade mark law. The information on this website is general in nature and does not constitute legal advice. Liability limited by a scheme approved under Professional Standards Legislation.</p>
+  <p><strong>Disclaimer:</strong> Dolman & Co. (ABN 46 775 837 936) is a registered trade mark attorney practice. We are not solicitors and do not provide legal advice outside the scope of trade mark law. The information on this website is general in nature and does not constitute legal advice. Liability limited by a scheme approved under Professional Standards Legislation. All matters described are represented in general terms to protect client confidentiality.</p>
 </div>
 
 <!-- PRIVACY MODAL -->
 <div class="modal-overlay" id="modal-privacy">
   <div class="modal-box">
-    <div class="modal-header">
-      <div>
-        <p class="modal-label">Legal</p>
-        <h2 class="modal-title">Privacy Policy</h2>
-        <p class="modal-date">Last updated: April 2026 · ABN 46 775 837 936</p>
-      </div>
-      <button class="modal-close" onclick="closeModal('privacy')">✕</button>
-    </div>
+    <div class="modal-header"><div><p class="modal-label">Legal</p><h2 class="modal-title">Privacy Policy</h2><p class="modal-date">Last updated: April 2026 · ABN 46 775 837 936</p></div><button class="modal-close" onclick="closeModal('privacy')">✕</button></div>
     <div class="modal-body">
       <div class="modal-highlight">Dolman & Co. (ABN 46 775 837 936) is committed to protecting your privacy in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs).</div>
-      <h2>1. Who We Are</h2>
-      <p>Dolman & Co. is a registered trade mark attorney practice operating in Australia. References to "we", "us", or "our" refer to Dolman & Co. (ABN 46 775 837 936). Our principal contact for privacy matters is trademarks@dolman.com.au.</p>
-      <h2>2. Information We Collect</h2>
-      <p>We may collect the following personal information:</p>
-      <ul>
-        <li>Your name, email address, and phone number when you contact us or book a consultation</li>
-        <li>Business details including ABN, company name, and trading name</li>
-        <li>Information about your trade marks, brand, or IP matters you share with us</li>
-        <li>Payment information processed through secure third-party providers</li>
-        <li>Website usage data collected through cookies and analytics tools</li>
-      </ul>
-      <h2>3. How We Use Your Information</h2>
-      <p>We use your personal information to provide trade mark attorney services, communicate with you about your matter, fulfil obligations to IP Australia, send updates about your registrations, and comply with legal and professional obligations. We will not use your information for unrelated purposes without your consent.</p>
-      <h2>4. Disclosure</h2>
-      <p>We may disclose your information to IP Australia for filing purposes, trusted third-party service providers bound by confidentiality, courts or regulatory bodies where required by law, and other professional advisers where you have instructed us to do so. We do not sell your information to third parties.</p>
-      <h2>5. Storage & Security</h2>
-      <p>We store information securely using reputable cloud-based services with appropriate encryption and access controls. We retain client files for a minimum of seven years following conclusion of a matter.</p>
-      <h2>6. Access & Correction</h2>
-      <p>You have the right to request access to your personal information and to request corrections. Contact us at <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a>. We will respond within 30 days.</p>
-      <h2>7. Complaints</h2>
-      <p>If you believe we have mishandled your personal information, contact us first at <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a>. If unresolved, you may lodge a complaint with the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au" target="_blank">oaic.gov.au</a>.</p>
-      <h2>8. Contact</h2>
-      <div class="modal-highlight">
-        Dolman & Co. · ABN 46 775 837 936<br>
-        Brisbane, Queensland, Australia<br>
-        <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a> · <a href="tel:+61417706988">+61 417 706 988</a>
-      </div>
+      <h2>1. Who We Are</h2><p>Dolman & Co. is a registered trade mark attorney practice operating in Australia. Our principal contact for privacy matters is trademarks@dolman.com.au.</p>
+      <h2>2. Information We Collect</h2><p>We may collect your name, email address, and phone number when you contact us; business details including ABN and company name; information about your trade marks or IP matters; payment information via secure third-party providers; and website usage data via cookies and analytics.</p>
+      <h2>3. How We Use Your Information</h2><p>We use your information to provide trade mark attorney services, communicate with you about your matter, fulfil obligations to IP Australia, send updates about your registrations, and comply with legal and professional obligations. We will not use your information for unrelated purposes without your consent.</p>
+      <h2>4. Disclosure</h2><p>We may disclose your information to IP Australia for filing purposes, trusted third-party service providers bound by confidentiality, courts or regulatory bodies where required by law, and other professional advisers where you have instructed us to do so. We do not sell your information to third parties.</p>
+      <h2>5. Storage & Security</h2><p>We store information securely using reputable cloud-based services with appropriate encryption. We retain client files for a minimum of seven years following conclusion of a matter.</p>
+      <h2>6. Access & Correction</h2><p>You have the right to request access to your personal information and request corrections. Contact us at trademarks@dolman.com.au. We will respond within 30 days.</p>
+      <h2>7. Complaints</h2><p>Contact us first at trademarks@dolman.com.au. If unresolved, you may lodge a complaint with the Office of the Australian Information Commissioner (OAIC) at oaic.gov.au.</p>
+      <h2>8. Contact</h2><div class="modal-highlight">Dolman & Co. · ABN 46 775 837 936<br>Brisbane, Queensland, Australia<br>trademarks@dolman.com.au · +61 417 706 988</div>
     </div>
   </div>
 </div>
@@ -462,47 +487,32 @@
 <!-- TERMS MODAL -->
 <div class="modal-overlay" id="modal-terms">
   <div class="modal-box">
-    <div class="modal-header">
-      <div>
-        <p class="modal-label">Legal</p>
-        <h2 class="modal-title">Terms of Engagement</h2>
-        <p class="modal-date">Last updated: April 2026 · ABN 46 775 837 936</p>
-      </div>
-      <button class="modal-close" onclick="closeModal('terms')">✕</button>
-    </div>
+    <div class="modal-header"><div><p class="modal-label">Legal</p><h2 class="modal-title">Terms of Engagement</h2><p class="modal-date">Last updated: April 2026 · ABN 46 775 837 936</p></div><button class="modal-close" onclick="closeModal('terms')">✕</button></div>
     <div class="modal-body">
       <div class="modal-highlight">These Terms of Engagement govern the provision of trade mark attorney services by Dolman & Co. (ABN 46 775 837 936). By engaging our services, you agree to these terms.</div>
-      <h2>1. About Dolman & Co.</h2>
-      <p>Dolman & Co. (ABN 46 775 837 936) is a registered trade mark attorney practice based in Brisbane, Queensland. We are registered with IP Australia to act as trade mark attorneys. We are not solicitors and do not provide general legal advice.</p>
-      <h2>2. Scope of Services</h2>
-      <p>Our services include trade mark searches and clearance reports, filing and prosecution before IP Australia, portfolio audits, licensing and assignment agreements, enforcement advice and cease and desist correspondence, and representation in IP Australia opposition proceedings. We do not provide Federal Court advocacy.</p>
-      <h2>3. Engagement & Instructions</h2>
-      <p>Our engagement commences when you provide written instructions and we confirm acceptance. You agree to provide accurate, complete, and timely information. We are entitled to rely on the information you provide.</p>
-      <h2>4. Fees & Payment</h2>
-      <p>Fees are as set out in your engagement letter, quoted in AUD exclusive of GST. Official fees payable to IP Australia are disbursements separate from our professional fees. Unless otherwise agreed, invoices are due within 14 days. We may require payment in advance for new clients. Overdue accounts may incur interest at 10% per annum.</p>
-      <h2>5. GST</h2>
-      <p>Dolman & Co. is registered for GST. GST will be added to professional fees at the applicable rate. A tax invoice will be provided for all amounts charged.</p>
-      <h2>6. Confidentiality</h2>
-      <p>We treat all information you provide as confidential and will not disclose it to third parties except as required to provide our services, as required by law, or with your consent. Note that trade mark applications become publicly available on the Australian Trade Mark Register once published by IP Australia.</p>
-      <h2>7. Limitation of Liability</h2>
-      <p>To the maximum extent permitted by law, our liability is limited to the fees paid by you for the specific matter giving rise to the claim. We are not liable for indirect or consequential loss. We are not responsible for decisions made by IP Australia or any other regulatory body, which are made at their independent discretion. A successful outcome cannot be guaranteed. Liability limited by a scheme approved under Professional Standards Legislation.</p>
-      <h2>8. Termination</h2>
-      <p>Either party may terminate the engagement by written notice. You remain liable for fees for work completed to the date of termination. Upon termination we will provide a summary of your matter status and return any original documents provided.</p>
-      <h2>9. Complaints</h2>
-      <p>Contact us first at <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a> or <a href="tel:+61417706988">+61 417 706 988</a>. We will respond within 20 business days. Unresolved complaints may be referred to the Trans-Tasman IP Attorneys Board (TTIPAB).</p>
-      <h2>10. Governing Law</h2>
-      <p>These terms are governed by the laws of Queensland, Australia. Any dispute is subject to the exclusive jurisdiction of the courts of Queensland.</p>
-      <h2>11. Contact</h2>
-      <div class="modal-highlight">
-        Dolman & Co. · ABN 46 775 837 936<br>
-        Brisbane, Queensland, Australia<br>
-        <a href="mailto:trademarks@dolman.com.au">trademarks@dolman.com.au</a> · <a href="tel:+61417706988">+61 417 706 988</a>
-      </div>
+      <h2>1. About Dolman & Co.</h2><p>Dolman & Co. (ABN 46 775 837 936) is a registered trade mark attorney practice based in Brisbane, Queensland. We are registered with IP Australia to act as trade mark attorneys. We are not solicitors and do not provide general legal advice.</p>
+      <h2>2. Scope of Services</h2><p>Our services include trade mark searches and clearance reports, filing and prosecution before IP Australia, portfolio audits, licensing and assignment agreements, enforcement advice and cease and desist correspondence, and representation in IP Australia opposition proceedings. We do not provide Federal Court advocacy.</p>
+      <h2>3. Engagement & Instructions</h2><p>Our engagement commences when you provide written instructions and we confirm acceptance. You agree to provide accurate, complete, and timely information. We are entitled to rely on the information you provide.</p>
+      <h2>4. Fees & Payment</h2><p>Fees are as set out in your engagement letter, quoted in AUD exclusive of GST. Official fees payable to IP Australia are disbursements separate from our professional fees. Unless otherwise agreed, invoices are due within 14 days. We may require payment in advance for new clients. Overdue accounts may incur interest at 10% per annum.</p>
+      <h2>5. GST</h2><p>Dolman & Co. is registered for GST. GST will be added to professional fees at the applicable rate. A tax invoice will be provided for all amounts charged.</p>
+      <h2>6. Confidentiality</h2><p>We treat all information you provide as confidential and will not disclose it except as required to provide our services, as required by law, or with your consent. Note that trade mark applications become publicly available on the Australian Trade Mark Register once published.</p>
+      <h2>7. Limitation of Liability</h2><p>To the maximum extent permitted by law, our liability is limited to the fees paid by you for the specific matter giving rise to the claim. We are not liable for indirect or consequential loss. We are not responsible for decisions made by IP Australia or any other regulatory body. A successful outcome cannot be guaranteed. Liability limited by a scheme approved under Professional Standards Legislation.</p>
+      <h2>8. Termination</h2><p>Either party may terminate the engagement by written notice. You remain liable for fees for work completed to the date of termination. Upon termination we will provide a summary of your matter status and return any original documents provided.</p>
+      <h2>9. Complaints</h2><p>Contact us first at trademarks@dolman.com.au or +61 417 706 988. We will respond within 20 business days. Unresolved complaints may be referred to the Trans-Tasman IP Attorneys Board (TTIPAB).</p>
+      <h2>10. Governing Law</h2><p>These terms are governed by the laws of Queensland, Australia. Any dispute is subject to the exclusive jurisdiction of the courts of Queensland.</p>
+      <h2>11. Contact</h2><div class="modal-highlight">Dolman & Co. · ABN 46 775 837 936<br>Brisbane, Queensland, Australia<br>trademarks@dolman.com.au · +61 417 706 988</div>
     </div>
   </div>
 </div>
 
 <script>
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    window.scrollTo(0, 0);
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    if (name === 'ourwork') document.getElementById('nav-our-work').classList.add('active');
+  }
   function openModal(type) {
     document.getElementById('modal-' + type).classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -511,25 +521,16 @@
     document.getElementById('modal-' + type).classList.remove('active');
     document.body.style.overflow = '';
   }
-  // Close on overlay click
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.classList.remove('active');
-        document.body.style.overflow = '';
-      }
+      if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; }
     });
   });
-  // Close on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay.active').forEach(m => {
-        m.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+      document.querySelectorAll('.modal-overlay.active').forEach(m => { m.classList.remove('active'); document.body.style.overflow = ''; });
     }
   });
 </script>
-
 </body>
 </html>
