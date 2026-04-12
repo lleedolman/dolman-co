@@ -229,9 +229,9 @@
   <a class="logo" onclick="showPage('home')">Dolman <span>&</span> Co.</a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a onclick="showPage('home','services-section')">Services</a></li>
-      <li><a onclick="showPage('home','why')">About</a></li>
-      <li><a onclick="showPage('home','process')">Process</a></li>
+      <li><a onclick="navTo('services-section')">Services</a></li>
+      <li><a onclick="navTo('why')">About</a></li>
+      <li><a onclick="navTo('process')">Process</a></li>
       <li><a id="nav-our-work" onclick="showPage('ourwork')">Our Work</a></li>
     </ul>
     <a href="/cdn-cgi/l/email-protection#4531372421202824372e3605212a2928242b6b262a286b2430" class="nav-cta">Book a Consult</a>
@@ -505,7 +505,22 @@
   </div>
 </div>
 <script>
-  function showPage(name, scrollTargetId) {
+  function navTo(sectionId) {
+    var isHome = document.getElementById('page-home').classList.contains('active');
+    if (!isHome) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-home').classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      window.scrollTo(0, 0);
+      setTimeout(function() {
+        var el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      var el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + name).classList.add('active');
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
