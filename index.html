@@ -19,7 +19,21 @@
   .nav-links a:hover,.nav-links a.active{color:var(--gold-light)}
   .nav-cta{display:inline-block;padding:11px 28px;border:1px solid rgba(184,151,58,0.5);color:var(--gold-pale);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;cursor:pointer}
   .nav-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
-  .gold-rule{height:1px;background:linear-gradient(to right,transparent,rgba(184,151,58,0.4),transparent)}
+  /* HAMBURGER */
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:300}
+  .hamburger span{display:block;width:24px;height:1px;background:var(--cream);transition:all 0.3s ease}
+  .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:250;background:rgba(13,27,46,0.98);flex-direction:column;justify-content:center;align-items:center;gap:0;backdrop-filter:blur(8px)}
+  .mobile-menu.open{display:flex}
+  .mobile-menu-links{list-style:none;display:flex;flex-direction:column;align-items:center;gap:0;width:100%}
+  .mobile-menu-links li{width:100%;text-align:center;border-bottom:1px solid rgba(184,151,58,0.08)}
+  .mobile-menu-links li:first-child{border-top:1px solid rgba(184,151,58,0.08)}
+  .mobile-menu-links a{display:block;padding:24px 40px;font-family:"Cormorant Garamond",serif;font-size:1.8rem;font-weight:300;color:var(--cream);text-decoration:none;cursor:pointer;transition:color 0.3s;letter-spacing:0.06em}
+  .mobile-menu-links a:hover{color:var(--gold-light)}
+  .mobile-menu-cta{margin-top:40px;padding:16px 44px;border:1px solid rgba(184,151,58,0.5);color:var(--gold-pale);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;background:none;transition:all 0.3s}
+  .mobile-menu-cta:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
   .page{display:none}.page.active{display:block}
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 100px;position:relative;overflow:hidden}
   .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 75% 15%,rgba(184,151,58,0.07) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 20% 85%,rgba(184,151,58,0.04) 0%,transparent 60%),linear-gradient(160deg,#0d1b2e 0%,#0a1525 60%,#0d1b2e 100%)}
@@ -160,8 +174,70 @@
   .modal-body ul li{font-size:0.75rem;line-height:2;color:var(--text-mid);margin-bottom:4px}
   .modal-body a{color:var(--gold-light);text-decoration:none}
   .modal-highlight{background:rgba(13,27,46,0.8);border-left:2px solid var(--gold);padding:20px 24px;margin:20px 0;font-size:0.74rem;line-height:1.9;color:var(--text-mid)}
-  @media(max-width:900px){
-    nav{padding:24px 28px}.nav-links{display:none}
+  /* ADVISORY PAGE */
+  .adv-hero{padding:160px 64px 100px;position:relative;overflow:hidden}
+  .adv-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(184,151,58,0.07) 0%,transparent 70%)}
+  .adv-hero-content{position:relative;z-index:2;max-width:800px}
+  .adv-page-label{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+  .adv-page-label::before{content:"";display:block;width:32px;height:1px;background:var(--gold)}
+  .adv-hero h1{font-family:"Cormorant Garamond",serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:1.05;color:var(--cream);margin-bottom:28px}
+  .adv-hero h1 em{font-style:italic;color:var(--gold-light)}
+  .adv-hero p{font-size:0.85rem;line-height:2;color:var(--text-mid);max-width:620px}
+  .tiers-section{padding:0 64px 100px}
+  .tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .tier-card{background:var(--navy-mid);padding:56px 44px;position:relative;overflow:hidden;transition:background 0.35s}
+  .tier-card:hover{background:var(--navy-light)}
+  .tier-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),transparent)}
+  .tier-card.featured{background:var(--navy-light)}
+  .tier-card.featured::before{background:var(--gold);height:3px}
+  .tier-badge{display:inline-block;padding:5px 14px;border:1px solid rgba(184,151,58,0.3);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+  .tier-badge.hot{background:rgba(184,151,58,0.12);border-color:var(--gold)}
+  .tier-name{font-family:"Cormorant Garamond",serif;font-size:1.8rem;font-weight:300;color:var(--cream);margin-bottom:8px;line-height:1.2}
+  .tier-name em{font-style:italic;color:var(--gold-light)}
+  .tier-price{font-size:0.68rem;letter-spacing:0.12em;color:var(--gold);margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid rgba(184,151,58,0.15)}
+  .tier-price strong{font-family:"Cormorant Garamond",serif;font-size:2.2rem;font-weight:300;color:var(--cream);letter-spacing:0;display:block;margin-bottom:4px}
+  .tier-desc{font-size:0.73rem;line-height:1.95;color:var(--text-muted);margin-bottom:28px}
+  .tier-includes{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+  .tier-includes li{font-size:0.7rem;line-height:1.7;color:var(--text-mid);display:flex;gap:12px;align-items:flex-start}
+  .tier-includes li::before{content:"";display:block;width:4px;height:4px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0}
+  .tier-ideal{font-size:0.62rem;letter-spacing:0.1em;color:var(--text-muted);font-style:italic;padding-top:20px;border-top:1px solid rgba(184,151,58,0.1)}
+  .adv-services{padding:100px 64px;background:var(--navy-mid)}
+  .adv-services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+  .adv-service-item{background:var(--navy);padding:44px 40px;transition:background 0.3s}
+  .adv-service-item:hover{background:var(--navy-light)}
+  .adv-service-cat{font-size:0.58rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .adv-service-name{font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:400;color:var(--cream);margin-bottom:14px;line-height:1.3}
+  .adv-service-desc{font-size:0.72rem;line-height:1.9;color:var(--text-muted);margin-bottom:20px}
+  .adv-service-fee{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);padding-top:16px;border-top:1px solid rgba(184,151,58,0.15)}
+  .adv-why{padding:100px 64px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+  .adv-why-left h2{font-family:"Cormorant Garamond",serif;font-size:clamp(2rem,3vw,3.2rem);font-weight:300;line-height:1.15;color:var(--cream);margin-bottom:32px}
+  .adv-why-left h2 em{font-style:italic;color:var(--gold-light)}
+  .adv-why-left p{font-size:0.78rem;line-height:2.1;color:var(--text-mid);margin-bottom:24px}
+  .adv-why-left blockquote{margin-top:44px;padding-left:28px;border-left:2px solid var(--gold)}
+  .adv-why-left blockquote p{font-family:"Cormorant Garamond",serif;font-size:1.2rem;font-style:italic;color:var(--gold-pale);line-height:1.6}
+  .adv-why-right{display:flex;flex-direction:column}
+  .adv-point{padding:32px 0;border-bottom:1px solid rgba(184,151,58,0.12);display:grid;grid-template-columns:28px 1fr;gap:20px;align-items:start}
+  .adv-point:first-child{border-top:1px solid rgba(184,151,58,0.12)}
+  .adv-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:7px}
+  .adv-point h4{font-family:"Cormorant Garamond",serif;font-size:1.1rem;font-weight:400;color:var(--cream);margin-bottom:8px}
+  .adv-point p{font-size:0.71rem;line-height:1.9;color:var(--text-muted)}
+  .projection{padding:100px 64px;background:var(--navy-mid)}
+  .projection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:64px}
+  .proj-card{background:var(--navy);padding:44px 32px}
+  .proj-scenario{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .proj-setup{font-family:"Cormorant Garamond",serif;font-size:0.9rem;font-weight:400;color:var(--text-mid);margin-bottom:20px;line-height:1.6}
+  .proj-number{font-family:"Cormorant Garamond",serif;font-size:2.8rem;font-weight:300;color:var(--cream);line-height:1;margin-bottom:8px}
+  .proj-period{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-muted)}
+  .proj-note{font-size:0.68rem;line-height:1.7;color:var(--text-muted);margin-top:16px;padding-top:16px;border-top:1px solid rgba(184,151,58,0.12)}
+    .adv-hero{padding:120px 28px 60px}
+    .tiers-section{padding:0 28px 60px}
+    .tiers-grid{grid-template-columns:1fr}
+    .adv-services{padding:60px 28px}
+    .adv-services-grid{grid-template-columns:1fr}
+    .adv-why{grid-template-columns:1fr;padding:60px 28px;gap:60px}
+    .projection{padding:60px 28px}
+    .projection-grid{grid-template-columns:1fr 1fr}
+    nav{padding:24px 28px}.nav-links{display:none}.nav-cta{display:none}.hamburger{display:flex}
     .hero,.ow-hero{padding:0 28px 80px}.ow-hero{padding-top:120px}
     .services,.industries,.associations{padding:80px 28px}
     .services-grid,.industry-grid,.matters-grid,.assoc-grid{grid-template-columns:1fr}
@@ -181,17 +257,33 @@
 <body>
 
 <nav>
-  <a class="logo" onclick="showPage('home')">Dolman <span>&amp;</span> Co.</a>
+  <a class="logo" onclick="showPage('home');closeMobileMenu()">Dolman <span>&amp;</span> Co.</a>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a onclick="navTo('services-section')">Services</a></li>
       <li><a onclick="navTo('why')">About</a></li>
       <li><a onclick="navTo('process')">Process</a></li>
       <li><a id="nav-our-work" onclick="showPage('ourwork')">Our Work</a></li>
+      <li><a id="nav-advisory" onclick="showPage('advisory')">Advisory</a></li>
     </ul>
     <a class="nav-cta" onclick="sendEmail()">Book a Consult</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul class="mobile-menu-links">
+    <li><a onclick="navTo('services-section');closeMobileMenu()">Services</a></li>
+    <li><a onclick="navTo('why');closeMobileMenu()">About</a></li>
+    <li><a onclick="navTo('process');closeMobileMenu()">Process</a></li>
+    <li><a onclick="showPage('ourwork');closeMobileMenu()">Our Work</a></li>
+    <li><a onclick="showPage('advisory');closeMobileMenu()">Advisory</a></li>
+  </ul>
+  <button class="mobile-menu-cta" onclick="sendEmail();closeMobileMenu()">Book a Consult</button>
+</div>
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
@@ -357,6 +449,118 @@
 </section>
 </div>
 
+<!-- ADVISORY PAGE -->
+<div class="page" id="page-advisory">
+<section class="adv-hero">
+  <div class="adv-hero-content">
+    <p class="adv-page-label">Advisory Services</p>
+    <h1>Beyond trade marks.<br><em>Strategic IP counsel</em><br>for businesses that mean it.</h1>
+    <p>For founders, executives, and boards who need more than a filing service. Dolman &amp; Co. offers ongoing strategic IP advisory &mdash; embedded counsel that thinks commercially, acts decisively, and protects everything you have built.</p>
+  </div>
+</section>
+<div class="gold-rule"></div>
+<section class="tiers-section">
+  <div style="padding:80px 0 60px">
+    <p class="section-label">Advisory Tiers</p>
+    <h2 class="section-title">Choose the level of<br>counsel your business <em>demands</em></h2>
+  </div>
+  <div class="tiers-grid">
+    <div class="tier-card">
+      <div class="tier-badge">Monthly Retainer</div>
+      <h3 class="tier-name">IP Advisory<br><em>Retainer</em></h3>
+      <div class="tier-price"><strong>$2,500 &mdash; $5,000</strong>per month + GST</div>
+      <p class="tier-desc">Ongoing IP counsel for growing businesses that need regular advice, portfolio management, and a trusted advisor on speed dial &mdash; without the cost of in-house legal.</p>
+      <ul class="tier-includes">
+        <li>Monthly strategy call (60 minutes)</li>
+        <li>Unlimited email advice on IP questions</li>
+        <li>Quarterly trade mark portfolio review</li>
+        <li>Continuous monitoring of your registered marks</li>
+        <li>Priority response within 4 business hours</li>
+        <li>Annual IP health report</li>
+        <li>Discounted rates on all filing and enforcement work</li>
+      </ul>
+      <p class="tier-ideal">Ideal for: Established SMEs, franchise systems, brands with active portfolios, businesses expanding into new markets</p>
+    </div>
+    <div class="tier-card featured">
+      <div class="tier-badge hot">Most Valuable</div>
+      <h3 class="tier-name">Fractional IP<br><em>Counsel</em></h3>
+      <div class="tier-price"><strong>$4,000 &mdash; $8,000</strong>per month + GST</div>
+      <p class="tier-desc">Your dedicated IP counsel &mdash; embedded in your business, present in your decisions, and acting as a true member of your leadership team. All the expertise of a senior IP attorney at a fraction of the in-house cost.</p>
+      <ul class="tier-includes">
+        <li>Defined weekly hours (typically 4&ndash;8 hours per week)</li>
+        <li>Attendance at board or leadership meetings on request</li>
+        <li>Full portfolio management and strategy</li>
+        <li>Vendor and contractor IP clause review</li>
+        <li>Employee IP agreement oversight</li>
+        <li>Investor and due diligence IP preparation</li>
+        <li>International expansion IP strategy</li>
+        <li>Enforcement and dispute management</li>
+        <li>Priority same-day response</li>
+      </ul>
+      <p class="tier-ideal">Ideal for: Scale-ups preparing for investment or acquisition, technology companies, SaaS businesses, companies without in-house legal</p>
+    </div>
+    <div class="tier-card">
+      <div class="tier-badge">Board Level</div>
+      <h3 class="tier-name">Board IP<br><em>Advisor</em></h3>
+      <div class="tier-price"><strong>$1,500 &mdash; $3,000</strong>per quarter + GST</div>
+      <p class="tier-desc">A seat at the table. For companies that want IP expertise at board level without a full retainer. Strategic IP governance and commercial IP intelligence delivered at board meetings.</p>
+      <ul class="tier-includes">
+        <li>Attendance at quarterly board meetings</li>
+        <li>IP risk and opportunity briefing each quarter</li>
+        <li>Board-ready IP position reports</li>
+        <li>Strategic IP recommendations to the board</li>
+        <li>Governance framework for IP decisions</li>
+        <li>Available for urgent board consultations</li>
+        <li>Annual IP strategy presentation to stakeholders</li>
+      </ul>
+      <p class="tier-ideal">Ideal for: Companies with boards or advisory boards, businesses preparing for sale or capital raise, organisations requiring IP governance oversight</p>
+    </div>
+  </div>
+</section>
+<div class="gold-rule"></div>
+<section class="adv-services">
+  <p class="section-label">Specialist Advisory Services</p>
+  <h2 class="section-title" style="margin-bottom:64px">Standalone engagements for<br>specific <em>commercial situations</em></h2>
+  <div class="adv-services-grid">
+    <div class="adv-service-item"><div class="adv-service-cat">Transactions</div><h3 class="adv-service-name">Acquisition Readiness &mdash; IP Due Diligence</h3><p class="adv-service-desc">Preparing for sale, merger, or capital raise? We conduct a full IP due diligence review &mdash; assessing your entire trade mark portfolio, identifying gaps, remediating weaknesses, and producing a board-ready IP schedule that withstands investor scrutiny.</p><div class="adv-service-fee">$20,000 &mdash; $40,000 fixed fee</div></div>
+    <div class="adv-service-item"><div class="adv-service-cat">Commercialisation</div><h3 class="adv-service-name">IP Commercialisation Strategy</h3><p class="adv-service-desc">Your IP is an asset. We help you understand what it is worth commercially and how to monetise it &mdash; through licensing, joint ventures, franchising, or commercialisation deals. We bring both legal framework knowledge and real-world commercial deal experience.</p><div class="adv-service-fee">$5,000 &mdash; $15,000 fixed fee</div></div>
+    <div class="adv-service-item"><div class="adv-service-cat">Franchise</div><h3 class="adv-service-name">Franchise IP Structuring</h3><p class="adv-service-desc">Building a franchise system requires your IP to be registered, owned correctly, and licensed to franchisees in a way that protects the entire network. We structure franchise IP from the ground up &mdash; trade marks, licensing agreements, franchisee obligations, and enforcement protocols.</p><div class="adv-service-fee">$10,000 &mdash; $30,000 fixed fee</div></div>
+    <div class="adv-service-item"><div class="adv-service-cat">International</div><h3 class="adv-service-name">Export &amp; International Market Entry IP Strategy</h3><p class="adv-service-desc">Expanding into the UK, US, Asia, or Europe? We build your international IP strategy &mdash; which markets, which marks, which classes, which timeline &mdash; so you launch protected rather than exposed. Particular expertise in Australia-to-UK market entry.</p><div class="adv-service-fee">$8,000 &mdash; $20,000 fixed fee</div></div>
+    <div class="adv-service-item"><div class="adv-service-cat">Technology</div><h3 class="adv-service-name">IP Policy &amp; Governance for Scale-Ups</h3><p class="adv-service-desc">As your business grows, IP created by employees and contractors becomes a significant commercial risk. We design and implement internal IP policies &mdash; ownership frameworks, contractor IP clauses, confidentiality structures, and escalation protocols that protect your assets as your team scales.</p><div class="adv-service-fee">$3,000 &mdash; $8,000 fixed fee</div></div>
+    <div class="adv-service-item"><div class="adv-service-cat">Brand Architecture</div><h3 class="adv-service-name">Brand Architecture &amp; Portfolio Strategy</h3><p class="adv-service-desc">Should your new product line be a separate brand? Should you register your tagline? We advise on how to structure your brand portfolio as your business evolves &mdash; preventing the expensive mistakes that come from building without a strategy.</p><div class="adv-service-fee">$3,000 &mdash; $10,000 fixed fee</div></div>
+    <div class="adv-service-item"><div class="adv-service-cat">Digital</div><h3 class="adv-service-name">Domain &amp; Platform Enforcement</h3><p class="adv-service-desc">Someone has registered your brand name as a domain. A competitor is using your mark on Instagram. A seller on Amazon is trading off your reputation. We manage domain dispute complaints, platform trade mark enforcement on Meta, Amazon, and eBay, and digital brand protection strategy.</p><div class="adv-service-fee">$2,500 &mdash; $6,000 fixed fee</div></div>
+    <div class="adv-service-item"><div class="adv-service-cat">Capital Markets</div><h3 class="adv-service-name">IP Valuation Support for Capital Raising</h3><p class="adv-service-desc">Investors increasingly scrutinise IP during due diligence. We prepare founders for those conversations &mdash; assessing the strength of their IP position, identifying what needs to be filed or fixed before the raise, and producing an IP summary document that gives investors confidence.</p><div class="adv-service-fee">$4,000 &mdash; $12,000 fixed fee</div></div>
+  </div>
+</section>
+<div class="gold-rule"></div>
+<section class="adv-why">
+  <div class="adv-why-left">
+    <p class="section-label">Why Advisory</p>
+    <h2>IP is not a one-time<br>filing. It is an<br><em>ongoing asset.</em></h2>
+    <p>Most businesses file a trade mark and forget about it. Then something goes wrong &mdash; a conflict surfaces, a competitor copies them, an investor asks questions they cannot answer, a sale falls through because their IP position is not clean.</p>
+    <p>The businesses that build real, lasting commercial value treat IP as a living asset. They manage it, monitor it, and develop it as their business evolves. That is what Dolman &amp; Co. advisory is built for.</p>
+    <p>You get an attorney who thinks about your IP the way you think about your business &mdash; commercially, strategically, and always with an eye on where you are going next.</p>
+    <blockquote><p>&ldquo;The most valuable legal relationship is the one that prevents problems, not the one that fixes them.&rdquo;</p></blockquote>
+  </div>
+  <div class="adv-why-right">
+    <div class="adv-point"><div class="adv-dot"></div><div><h4>A thinking partner, not a processor.</h4><p>Advisory clients do not just get filings and reports. They get a commercial mind embedded in their business &mdash; someone who flags opportunities and risks before they become expensive.</p></div></div>
+    <div class="adv-point"><div class="adv-dot"></div><div><h4>Your IP grows with your business.</h4><p>As you launch new products, enter new markets, and build new brand assets, your portfolio evolves. Advisory clients have a system in place to protect everything they build &mdash; not just what they thought of at the start.</p></div></div>
+    <div class="adv-point"><div class="adv-dot"></div><div><h4>Always investor and acquirer ready.</h4><p>Advisory clients have clean, documented, properly structured IP at all times. When a capital raise or acquisition opens, they are ready immediately &mdash; not scrambling to fix years of gaps in six weeks.</p></div></div>
+    <div class="adv-point"><div class="adv-dot"></div><div><h4>A fraction of in-house cost.</h4><p>A senior in-house IP attorney in Australia costs $180,000 to $280,000 per year. Fractional IP counsel delivers the same strategic value at $48,000 to $96,000 &mdash; with no employment overhead and no long-term commitment.</p></div></div>
+    <div class="adv-point"><div class="adv-dot"></div><div><h4>Someone in your corner when things go wrong.</h4><p>Trade mark disputes move fast. Advisory clients have an attorney who already knows their portfolio and can act immediately &mdash; not spend three days getting up to speed.</p></div></div>
+  </div>
+</section>
+<div class="gold-rule"></div>
+<section class="cta-section">
+  <h2>Ready to build<br>something <em>lasting?</em></h2>
+  <p class="cta-sub">Advisory engagements begin with a 30-minute discovery call. We will discuss your business, your IP position, and which level of counsel makes sense for where you are heading.</p>
+  <div class="cta-buttons">
+    <a class="btn-primary" onclick="sendEmail()">Book a Discovery Call</a>
+    <a class="btn-ghost" href="tel:+61417706988">+61 417 706 988</a>
+  </div>
+</section>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">
@@ -370,12 +574,13 @@
       <li><a onclick="navTo('why')">About</a></li>
       <li><a onclick="navTo('process')">Process</a></li>
       <li><a onclick="showPage('ourwork')">Our Work</a></li>
+      <li><a onclick="showPage('advisory')">Advisory</a></li>
     </ul>
   </div>
   <div class="footer-col">
     <h5>Contact</h5>
     <ul>
-      <li><a onclick="sendEmail()" style="cursor:pointer;" id="footer-email">trademarks@dolman.com.au</a></li>
+      <li><a onclick="sendEmail()" style="cursor:pointer;" id="footer-email">trademarks[at]dolman.com.au</a></li>
       <li><a href="tel:+61417706988">+61 417 706 988</a></li>
       <li>Brisbane, Queensland, Australia</li>
       <li><a href="https://www.dolman.com.au">dolman.com.au</a></li>
@@ -400,14 +605,14 @@
     <div class="modal-header"><div><p class="modal-label">Legal</p><h2 class="modal-title">Privacy Policy</h2><p class="modal-date">Last updated: April 2026 &middot; ABN 46 775 837 936</p></div><button class="modal-close" onclick="closeModal('privacy')">&#x2715;</button></div>
     <div class="modal-body">
       <div class="modal-highlight">Dolman &amp; Co. (ABN 46 775 837 936) is committed to protecting your privacy in accordance with the Privacy Act 1988 (Cth) and the Australian Privacy Principles (APPs).</div>
-      <h2>1. Who We Are</h2><p>Dolman &amp; Co. is a registered trade mark attorney practice operating in Australia. Our principal contact for privacy matters is trademarks@dolman.com.au.</p>
+      <h2>1. Who We Are</h2><p>Dolman &amp; Co. is a registered trade mark attorney practice operating in Australia. Our principal contact for privacy matters is trademarks[at]dolman.com.au.</p>
       <h2>2. Information We Collect</h2><p>We may collect your name, email address, and phone number when you contact us; business details including ABN and company name; information about your trade marks or IP matters; payment information via secure third-party providers; and website usage data via cookies and analytics.</p>
       <h2>3. How We Use Your Information</h2><p>We use your information to provide trade mark attorney services, communicate with you about your matter, fulfil obligations to IP Australia, send updates about your registrations, and comply with legal and professional obligations. We will not use your information for unrelated purposes without your consent.</p>
       <h2>4. Disclosure</h2><p>We may disclose your information to IP Australia for filing purposes, trusted third-party service providers bound by confidentiality, courts or regulatory bodies where required by law, and other professional advisers where you have instructed us to do so. We do not sell your information to third parties.</p>
       <h2>5. Storage &amp; Security</h2><p>We store information securely using reputable cloud-based services with appropriate encryption. We retain client files for a minimum of seven years following conclusion of a matter.</p>
-      <h2>6. Access &amp; Correction</h2><p>You have the right to request access to your personal information and request corrections. Contact us at trademarks@dolman.com.au. We will respond within 30 days.</p>
-      <h2>7. Complaints</h2><p>Contact us first at trademarks@dolman.com.au. If unresolved, you may lodge a complaint with the Office of the Australian Information Commissioner (OAIC) at oaic.gov.au.</p>
-      <h2>8. Contact</h2><div class="modal-highlight">Dolman &amp; Co. &middot; ABN 46 775 837 936<br>Brisbane, Queensland, Australia<br>trademarks@dolman.com.au &middot; +61 417 706 988</div>
+      <h2>6. Access &amp; Correction</h2><p>You have the right to request access to your personal information and request corrections. Contact us at trademarks[at]dolman.com.au. We will respond within 30 days.</p>
+      <h2>7. Complaints</h2><p>Contact us first at trademarks[at]dolman.com.au. If unresolved, you may lodge a complaint with the Office of the Australian Information Commissioner (OAIC) at oaic.gov.au.</p>
+      <h2>8. Contact</h2><div class="modal-highlight">Dolman &amp; Co. &middot; ABN 46 775 837 936<br>Brisbane, Queensland, Australia<br>trademarks[at]dolman.com.au &middot; +61 417 706 988</div>
     </div>
   </div>
 </div>
@@ -426,9 +631,9 @@
       <h2>6. Confidentiality</h2><p>We treat all information you provide as confidential and will not disclose it except as required to provide our services, as required by law, or with your consent. Note that trade mark applications become publicly available on the Australian Trade Mark Register once published.</p>
       <h2>7. Limitation of Liability</h2><p>To the maximum extent permitted by law, our liability is limited to the fees paid by you for the specific matter giving rise to the claim. We are not liable for indirect or consequential loss. We are not responsible for decisions made by IP Australia or any other regulatory body. A successful outcome cannot be guaranteed. Liability limited by a scheme approved under Professional Standards Legislation.</p>
       <h2>8. Termination</h2><p>Either party may terminate the engagement by written notice. You remain liable for fees for work completed to the date of termination. Upon termination we will provide a summary of your matter status and return any original documents provided.</p>
-      <h2>9. Complaints</h2><p>Contact us first at trademarks@dolman.com.au or +61 417 706 988. We will respond within 20 business days. Unresolved complaints may be referred to the Trans-Tasman IP Attorneys Board (TTIPAB).</p>
+      <h2>9. Complaints</h2><p>Contact us first at trademarks[at]dolman.com.au or +61 417 706 988. We will respond within 20 business days. Unresolved complaints may be referred to the Trans-Tasman IP Attorneys Board (TTIPAB).</p>
       <h2>10. Governing Law</h2><p>These terms are governed by the laws of Queensland, Australia. Any dispute is subject to the exclusive jurisdiction of the courts of Queensland.</p>
-      <h2>11. Contact</h2><div class="modal-highlight">Dolman &amp; Co. &middot; ABN 46 775 837 936<br>Brisbane, Queensland, Australia<br>trademarks@dolman.com.au &middot; +61 417 706 988</div>
+      <h2>11. Contact</h2><div class="modal-highlight">Dolman &amp; Co. &middot; ABN 46 775 837 936<br>Brisbane, Queensland, Australia<br>trademarks[at]dolman.com.au &middot; +61 417 706 988</div>
     </div>
   </div>
 </div>
@@ -447,6 +652,22 @@
     var el = document.getElementById('footer-email');
     if (el) el.textContent = email;
   });
+
+  function toggleMobileMenu() {
+    var menu = document.getElementById('mobile-menu');
+    var burger = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    burger.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function closeMobileMenu() {
+    var menu = document.getElementById('mobile-menu');
+    var burger = document.getElementById('hamburger');
+    menu.classList.remove('open');
+    burger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
   function navTo(sectionId) {
     var homePage = document.getElementById('page-home');
@@ -470,6 +691,7 @@
     document.getElementById('page-' + name).classList.add('active');
     document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
     if (name === 'ourwork') document.getElementById('nav-our-work').classList.add('active');
+    if (name === 'advisory') document.getElementById('nav-advisory').classList.add('active');
     window.scrollTo(0, 0);
   }
 
